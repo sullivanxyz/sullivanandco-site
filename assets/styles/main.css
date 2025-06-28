@@ -95,15 +95,11 @@ h1, h2, h3 {
     font-size: 1.2rem;
     margin-top: 0.2rem;
 }
-.testimonials, .how-it-works, .about-me, .packages, .sample-work {
+.how-it-works, .about-me, .packages, .sample-work {
     margin-top: 2rem;
     padding: 1rem;
     background-color: #f9f9f9;
     border-radius: 10px;
-}
-.testimonial {
-    font-style: italic;
-    margin-bottom: 1rem;
 }
 .pricing-option {
     background: #fff;
@@ -189,6 +185,87 @@ h1, h2, h3 {
     font-size: 0.9rem;
     color: #777;
     margin-bottom: 4rem;
+}
+.resources-section {
+  background-color: #f7f7f7;
+  padding: 20px 20px 40px;
+  margin-top: 0;
+}
+
+.resources-section h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+/* Why Now section */
+.why-now {
+  background-color: #fff;
+  padding: 10px 20px 30px;
+}
+
+.section-tag {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.why-now-inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.why-now h2 {
+  font-size: 1.9rem;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.why-now-blocks {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .why-now-blocks {
+    grid-template-columns: repeat(3, 1fr);
+    text-align: left;
+  }
+}
+
+.why-item strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.why-item p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #333;
+}
+.floating-cta {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: opacity 0.3s ease;
+}
+
+.floating-cta i {
+  font-size: 20px;
 }
 @media(min-width: 768px) {
     h1 {

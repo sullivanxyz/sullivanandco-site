@@ -1,148 +1,123 @@
-<!DOCTYPE HTML>
-<!--
-	Sullivan and Co
-	May 2025 
--->
-<html>
-	<head>
-		<title>Sullivan and Co | Smarter Money. Stronger Systems. Lighter Living. </title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sullivan and Co.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="assets/styles/main.css">
+  <script async src="https://tally.so/widgets/embed.js"></script>
+</head>
+<body>
 
-		<!-- Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-JBH4Q6L0QV"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+<header>
+  <div>
+    <img src="assets/images/favicon.png" alt="icon" class="brand-icon-small">
+    <strong>Sullivan and Co</strong>
+  </div>
+  <div class="menu-icon" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+  <div id="dropdown-menu" class="menu">
+    <a href="#top">Home</a>
+    <a href="#resources">Resources</a>
+    <a href="#packages">Packages</a>
+    <a href="#about">About Us</a>
+  </div>
+</header>
 
-		  gtag('config', 'G-JBH4Q6L0QV');
-		</script>
-	</head>
-	<body class="is-preload">
+<div id="top" class="container">
+  <h1>Make Life Work Better.</h1>
+  <p class="subheadline">Upgrade your digital world — with expert advice and ongoing support - and live lighter.</p>
+  <button class="cta-button" data-tally-open="mVa8N6" data-tally-auto-close="8000">Get Started Free</button>
+  <p class="disclaimer">No commitment, no stress. Just clarity.</p>
 
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
+  <div id="resources">
+    <p class="section-title">What We Do</p>
+    <p class="section-subtitle">Digital coaching and setup for busy professionals and families</p>
+    <div class="grid-icons">
+      <div class="icon-box"><i class="fas fa-folder-open"></i><div><strong>Hubs & Workspaces</strong><br>Branded email/websites and HQs that actually work </div></div>
+      <div class="icon-box"><i class="fas fa-piggy-bank"></i><div><strong>Spending & Saving</strong><br>Cash flow tracking and finance automation, aligned to your goals</div></div>
+      <div class="icon-box"><i class="fas fa-check-square"></i><div><strong>Routines & Templates</strong><br>Low-friction tools to own your day, week, and year </div></div>
+      <div class="icon-box"><i class="fas fa-globe"></i><div><strong>Changes & Milestones</strong><br>Plan for life's big changes with systems that grow with you</div></div>
+    
+    </div>
+  </div>
 
-				<!-- Wrapper -->
-					<div id="wrapper">
+  <div class="testimonials">
+    <h2>What Clients Say</h2>
+    <p class="testimonial">“Now my partner and I are actually on the same page. Literally.”</p>
+    <p class="testimonial">“I got my will, budget, and domain sorted — in one weekend.”</p>
+    <p class="testimonial">“It’s like having a personal trainer for my digital life.”</p>
+  </div>
 
-						<!-- Panel (Banner) -->
-							<section class="panel banner right">
-								<div class="content color0 span-3-75">
-									<h1 class="major">Upgrade to clear <br />
-									finances and lighter living</h1>
-									<p>At <strong>Sullivan and Co</strong>, we help busy professionals and families create smart digital systems personalized to their needs and situation. No stress, no confusion, no digital chaos. </p>
-									<ul class="actions">
-										<li><a href="#first" class="button primary color1 circle icon solid fa-angle-right">Next</a></li>
-									</ul>
-								</div>
-								<div class="image filtered span-1-75" data-position="25% 25%">
-									<img src="images/phoneclarity.png" alt="" />
-								</div>
-							</section>
+  <div class="how-it-works">
+    <h2>How It Works</h2>
+    <p><strong>Step 1:</strong> Book a free discovery call.</p>
+    <p><strong>Step 2:</strong> Get a personalized setup plan.</p>
+    <p><strong>Step 3:</strong> Choose one-time help or ongoing support.</p>
+  </div>
 
-						<!-- Panel -->
-							<section class="panel medium color4" id="first">
-								<div class=" intro">
-									<h2 class="major">💪 You're thriving, but life keeps getting bigger</h2>
-								</div>
-								<div class="inner span-6">
-									<p>New goals, new adventures, new responsibilities. Don't let the structure around you <bold> stay stuck in the past </bold>. 
-									<br><br>Financial stretch and digital overload aren't signs of failure. They are the burden of success. </p>
-								</div>
+  <div class="sample-work">
+    <h2>See Samples of Our Work</h2>
+    <button class="sample-btn" onclick="openCarousel()">View Gallery</button>
+  </div>
 
-							</section>
+  <div id="carouselOverlay" class="carousel-overlay">
+    <div class="carousel-content">
+      <h3>Sample Projects</h3>
+      <div class="carousel-images">
+        <img src="https://via.placeholder.com/200x140?text=Budget+Tool" alt="Sample 1">
+        <img src="https://via.placeholder.com/200x140?text=Shared+Calendar" alt="Sample 2">
+        <img src="https://via.placeholder.com/200x140?text=Domain+Setup" alt="Sample 3">
+        <img src="https://via.placeholder.com/200x140?text=Digital+Folder" alt="Sample 4">
+      </div>
+      <button class="close-btn" onclick="closeCarousel()">Close</button>
+    </div>
+  </div>
 
-						<!-- Panel (Spotlight) -->
-							<section class="panel small color3-alt center">
-								<div class="intro span-8">
-									<h2 class="major"> ✅ What You Can Expect</h2>
-									<ul class="alt">
-											<li>Clean, accessible digital spaces.</li>
-											<li>Planning workflows that fit with life.</li>
-											<li>Financial systems that give you confidence.</li>
-											<li>Mental clarity on what matters most.</li>
-									</ul>
+  <div id="about" class="about-me">
+    <h2>About Me</h2>
+    <p>Hi, I’m Drew. I spent 15 years in financial tech building systems that worked for companies — now I help people build systems that work for life. Sullivan and Co. is my way of bringing that same clarity and structure to you and your family.</p>
+  </div>
 
-								</div>
+  <div id="packages" class="packages">
+    <h2>Packages</h2>
+    <div class="pricing-option">
+      <strong>Quick Fix - Starts at $29 </strong> 
+      One time template or workflow to action a focused problem.
+    </div>
+    <div class="pricing-option">
+      <strong>Full Service Setup – Starts at $99</strong>
+      Workspace build from the ground up to meet bespoke needs; training and knowledge base included.
+    </div>
+    <div class="pricing-option">
+      <strong>Ongoing Support – Starts at $49/month</strong>
+     Direct access to regular coaching, refreshes, hosting, and dedicated tech support -- all in one.
+    </div>
+  </div>
 
-							</section>
-						<!-- Panel -->
-							<section class="panel color2">
-								<div class="intro">
-									<h2 class="major">🏗️ What We Build</h2>
-									<p>Money, habits, and logistics aren’t separate. They’re the foundation you build everything else on.</p>
-								</div>
-								<div class="inner">
-									<ul class="grid-icons">
-										<li><a href ="#" class="button circle icon fa-gem">Icon</a></li>
-										<li><a href ="#" class="button circle icon fa-paper-plane">Icon</a></li>
-										<li><a href ="#" class="button circle icon fa-chart-bar">Icon</a></li>
-										<li><a href ="#" class="button circle icon fa-gear">Icon</a></li>
+  <div class="sample-work">
+    <h2>Ready to Take the First Step?</h2>
+    <p>Whether you're just starting or refining what already exists, let’s build something better together.</p>
+    <button class="sample-btn" data-tally-open="mVa8N6" data-tally-auto-close="8000">Start with a Free Discovery Call</button>
+  </div>
 
-									</ul>
-								</div>
-							</section>
+  <img src="assets/images/logo.png" alt="Sullivan and Co. Logo" class="footer-logo">
+  <p class="footer-mantra">“It’s never too late to be who you might have been.”</p>
+  <div class="masthead">
+    Founded in 2025 • Built in NYC • © Sullivan and Co
+  </div>
+</div>
 
-
-
-						<!-- Panel -->
-							<section class="panel">
-								<div class="intro color0">
-									<h2 class="major"> 👤 Who We Are</h2>
-									<p>I’m Drew, a NYC based digital product leader by day and a personal finance and organizational coach on the side. After 15 years working to move one of the world’s largest financial institutions forward  —and helping friends do the same—I started Sullivan and Co. to bring that clarity to others.</p>
-								</div>
-			
-							</section>
-
-						<!-- Panel -->
-							<section class="panel color4-alt">
-	
-
-								
-								<div class="inner columns divided">
-									<div class="span-3-25">
-										<div class="intro color4">
-											<h2 class="major">👉 Ready to Take the First Step?</h2>
-											<p>Schedule a complimentary discovery call where we'll dig into what's your mind before creating a custom blueprint and plan to tackle together.</p>
-								
-
-										<ul class="actions">								
-											<li><a href="https://drewsullivan.notion.site/ebd/1e282286a11480a1be81dad99f5c7799" class="button primary">Get Started</a></li>
-										</ul>
-
-										</div>
-
-
-
-									</div>
-									<div class="span-1-5">
-										<ul class="contact-icons color1">
-											<li class="icon brands fa-linkedin"><a href="#">@drewsullivan</a></li>
-											<li class="icon brands fa-snapchat-ghost"><a href="#">@untitled-tld</a></li>
-											<li class="icon brands fa-instagram"><a href="#">@untitled-tld</a></li>
-										</ul>
-									</div>
-								</div>
-							</section>
-
-				
-
-						<!-- Copyright -->
-							<div class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</div>
-
-					</div>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+<script src="assets/scripts/main.js"></script>
+<script>
+  function openCarousel() {
+    document.getElementById('carouselOverlay').style.display = 'flex';
+  }
+  function closeCarousel() {
+    document.getElementById('carouselOverlay').style.display = 'none';
+  }
+</script>
+</body>
 </html>

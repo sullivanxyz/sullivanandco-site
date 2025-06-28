@@ -1,0 +1,203 @@
+
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: #111;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 1001;
+}
+.menu-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 1rem;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    z-index: 1000;
+}
+.menu a {
+    display: block;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: #111;
+    border-bottom: 1px solid #eee;
+}
+.menu a:last-child {
+    border-bottom: none;
+}
+.container {
+    padding: 6rem 1.5rem 1.5rem;
+}
+h1, h2, h3 {
+    margin-bottom: 0.5rem;
+}
+.subheadline {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+.cta-button {
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+}
+.disclaimer {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+.section-title {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+}
+.section-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+.grid-icons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.icon-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+.icon-box i {
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
+}
+.testimonials, .how-it-works, .about-me, .packages, .sample-work {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+.testimonial {
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+.pricing-option {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+.pricing-option strong {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+.sample-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.carousel-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+.carousel-content {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 80%;
+    overflow: hidden;
+    text-align: center;
+}
+.carousel-images {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+}
+.carousel-images img {
+    width: 200px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.close-btn {
+    margin-top: 1rem;
+    background: #111;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.brand-icon-small {
+    width: 24px;
+    height: auto;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+.footer-logo {
+    display: block;
+    margin: 4rem auto 1rem;
+    max-width: 120px;
+}
+.footer-mantra {
+    text-align: center;
+    font-style: italic;
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 1rem;
+}
+.masthead {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 4rem;
+}
+@media(min-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    .cta-button {
+        font-size: 1.1rem;
+    }
+    .grid-icons {
+        grid-template-columns: 1fr 1fr;
+    }
+}

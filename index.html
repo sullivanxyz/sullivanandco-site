@@ -28,27 +28,39 @@
 
 <div id="top" class="container">
   <h1>Make Life Work Better.</h1>
-  <p class="subheadline">Upgrade your digital world — with expert advice and ongoing support - and live lighter.</p>
+  <p class="subheadline">Upgrade your digital world and live lighter.</p>
   <button class="cta-button" data-tally-open="mVa8N6" data-tally-auto-close="8000">Get Started Free</button>
   <p class="disclaimer">No commitment, no stress. Just clarity.</p>
 
-  <div id="resources">
-    <p class="section-title">What We Do</p>
-    <p class="section-subtitle">Digital coaching and setup for busy professionals and families</p>
+  <div class="why-now">
+    <div class="why-now-inner">
+      <h2>Modern Life Demands More Than a Spreadsheet</h2>
+      <div class="why-now-blocks">
+        <div class="why-item">
+          <strong>You’re already succeeding — but it still feels scattered.</strong>
+          <p>Between family calendars, shared docs, endless apps and inboxes, most people are duct-taping a digital life together. It works — until it doesn’t.</p>
+        </div>
+        <div class="why-item">
+          <strong>Half-systems waste your energy and hide your progress.</strong>
+          <p>When everything lives in your head (or 12 browser tabs), it’s harder to feel calm, focused, or confident. The right setup gives your mind room to lead, not just react.</p>
+        </div>
+        <div class="why-item">
+          <strong>This is your chance to build something sustainable.</strong>
+          <p>Modern life deserves modern systems — simple, scalable, and built around what matters to you. That’s what we do together.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="resources" class="resources-section">
+    <h2>What We Offer</h2>
+    <p class="section-subtitle">Digital coaching and expert setup for busy professionals and families</p>
     <div class="grid-icons">
       <div class="icon-box"><i class="fas fa-folder-open"></i><div><strong>Hubs & Workspaces</strong><br>Branded email/websites and HQs that actually work </div></div>
       <div class="icon-box"><i class="fas fa-piggy-bank"></i><div><strong>Spending & Saving</strong><br>Cash flow tracking and finance automation, aligned to your goals</div></div>
       <div class="icon-box"><i class="fas fa-check-square"></i><div><strong>Routines & Templates</strong><br>Low-friction tools to own your day, week, and year </div></div>
       <div class="icon-box"><i class="fas fa-globe"></i><div><strong>Changes & Milestones</strong><br>Plan for life's big changes with systems that grow with you</div></div>
-    
     </div>
-  </div>
-
-  <div class="testimonials">
-    <h2>What Clients Say</h2>
-    <p class="testimonial">“Now my partner and I are actually on the same page. Literally.”</p>
-    <p class="testimonial">“I got my will, budget, and domain sorted — in one weekend.”</p>
-    <p class="testimonial">“It’s like having a personal trainer for my digital life.”</p>
   </div>
 
   <div class="how-it-works">
@@ -60,7 +72,7 @@
 
   <div class="sample-work">
     <h2>See Samples of Our Work</h2>
-    <button class="sample-btn" onclick="openCarousel()">View Gallery</button>
+    <button class="sample-btn" onclick="openCarousel()">View</button>
   </div>
 
   <div id="carouselOverlay" class="carousel-overlay">
@@ -78,22 +90,22 @@
 
   <div id="about" class="about-me">
     <h2>About Me</h2>
-    <p>Hi, I’m Drew. I spent 15 years in financial tech building systems that worked for companies — now I help people build systems that work for life. Sullivan and Co. is my way of bringing that same clarity and structure to you and your family.</p>
+    <p>Hi, I’m Drew. I've spent 15 years in financial tech building systems for the #1 company on Forbes Global 2000 list. Now I help people build systems that work for life. Sullivan and Co is my way of bringing that same clarity and structure to you and your family.</p>
   </div>
 
   <div id="packages" class="packages">
     <h2>Packages</h2>
     <div class="pricing-option">
       <strong>Quick Fix - Starts at $29 </strong> 
-      One time template or workflow to action a focused problem.
+      One time template or workflow to solve a focused problem fast.
     </div>
     <div class="pricing-option">
       <strong>Full Service Setup – Starts at $99</strong>
-      Workspace build from the ground up to meet bespoke needs; training and knowledge base included.
+      Custom-built workspace with quick start guide, training, and doumentation for bespoke needs.
     </div>
     <div class="pricing-option">
-      <strong>Ongoing Support – Starts at $49/month</strong>
-     Direct access to regular coaching, refreshes, hosting, and dedicated tech support -- all in one.
+      <strong>Always On – Starts at $49/month</strong>
+     Ongoing coaching, refreshes, hosting, and  tech support — all in one monthly plan.
     </div>
   </div>
 
@@ -104,11 +116,16 @@
   </div>
 
   <img src="assets/images/logo.png" alt="Sullivan and Co. Logo" class="footer-logo">
-  <p class="footer-mantra">“It’s never too late to be who you might have been.”</p>
+  <p class="footer-mantra">“it’s never too late to be who you might have been.”</p>
   <div class="masthead">
     Founded in 2025 • Built in NYC • © Sullivan and Co
   </div>
 </div>
+
+<!-- Floating CTA -->
+<button id="floatingCTA" class="floating-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000">
+  <i class="fa-solid fa-paper-plane"></i>
+</button>
 
 <script src="assets/scripts/main.js"></script>
 <script>
@@ -118,6 +135,17 @@
   function closeCarousel() {
     document.getElementById('carouselOverlay').style.display = 'none';
   }
+
+  // Scroll-based visibility for floating CTA
+  window.addEventListener('scroll', function() {
+    const cta = document.getElementById('floatingCTA');
+    const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    if (scrollPercentage > 0.3) {
+      cta.style.display = 'flex';
+    } else {
+      cta.style.display = 'none';
+    }
+  });
 </script>
 </body>
 </html>

@@ -29,9 +29,8 @@
   <div class="menu-icon" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
   <div id="dropdown-menu" class="menu">
     <a href="#top">Home</a>
-    <a href="#resources">Resources</a>
-    <a href="#packages">Packages</a>
-    <a href="#about">About Us</a>
+    <a href="#resources">What We Offer</a>
+    <a href="#packages">Pricing</a>
   </div>
 </header>
 
@@ -43,20 +42,19 @@
 
   <div class="why-now">
     <div class="why-now-inner">
-      <p class="section-tag">Why It Matters</p>
-      <h2>Modern Life Demands More Than a Spreadsheet</h2>
+      <h2>You Deserve More Than a Spreadsheet</h2>
       <div class="why-now-blocks">
         <div class="why-item">
-          <strong>You’re already succeeding — but it still feels scattered.</strong>
-          <p>Between family calendars, shared docs, endless apps and inboxes, most people are duct-taping a digital life together. It works — until it doesn’t.</p>
+          <strong>You're already succeeding — but your systems might be holding you back.</strong>
+          <p>Managing life through scattered apps, tabs, and mental lists works — until it doesn’t.</p>
         </div>
         <div class="why-item">
-          <strong>Half-systems waste your energy and hide your progress.</strong>
-          <p>When everything lives in your head (or 12 browser tabs), it’s harder to feel calm, focused, or confident. The right setup gives your mind room to lead, not just react.</p>
+          <strong>Better tools create more space to focus on what matters.</strong>
+          <p>A calm, modern setup frees your energy and helps you lead, not just react.</p>
         </div>
         <div class="why-item">
-          <strong>This is your chance to build something sustainable.</strong>
-          <p>Modern life deserves modern systems — simple, scalable, and built around what matters to you. That’s what we do together.</p>
+          <strong>This isn’t just productivity — it’s peace of mind.</strong>
+          <p>We build systems that scale with your life and actually support how you want to live.</p>
         </div>
       </div>
     </div>
@@ -74,37 +72,36 @@
   </div>
 
   <div class="how-it-works">
-    <h2>How It Works</h2>
-    <p><strong>Step 1:</strong> Book a free discovery call.</p>
-    <p><strong>Step 2:</strong> Get a personalized setup plan.</p>
-    <p><strong>Step 3:</strong> Choose one-time help or ongoing support.</p>
-  </div>
-
-  <div class="sample-work">
-    <h2>See Samples of Our Work</h2>
-    <button class="sample-btn" onclick="openCarousel()">View</button>
-  </div>
-
-  <div id="carouselOverlay" class="carousel-overlay">
-    <div class="carousel-content">
-      <h3>Sample Projects</h3>
-      <div class="carousel-images">
-        <img src="https://via.placeholder.com/200x140?text=Budget+Tool" alt="Sample 1">
-        <img src="https://via.placeholder.com/200x140?text=Shared+Calendar" alt="Sample 2">
-        <img src="https://via.placeholder.com/200x140?text=Domain+Setup" alt="Sample 3">
-        <img src="https://via.placeholder.com/200x140?text=Digital+Folder" alt="Sample 4">
+    <h3>How It Works</h3>
+      <div class="how-it-works-steps">
+        <p><strong>Step 1:</strong> Book a free discovery call.</p>
+        <p><strong>Step 2:</strong> Get a personalized setup plan.</p>
+        <p><strong>Step 3:</strong> Choose one-time help or ongoing support.</p>
+	<p class="sample-cta">
+  	   <em>Curious what this actually looks like?</em>
+  	   <button class="sample-view-btn" onclick="openCarousel()">View </button>
+	</p>      
       </div>
-      <button class="close-btn" onclick="closeCarousel()">Close</button>
-    </div>
   </div>
 
-  <div id="about" class="about-me">
-    <h2>About Me</h2>
-    <p>Hi, I’m Drew. I've spent 15 years in financial tech building systems for the #1 company on Forbes Global 2000 list. Now I help people build systems that work for life. Sullivan and Co is my way of bringing that same clarity and structure to you and your family.</p>
+<div id="carouselOverlay" class="carousel-overlay" onclick="closeCarousel(event)">
+  <div class="carousel-content" onclick="event.stopPropagation()">
+    <h3>Sample Projects</h3>
+    <div class="carousel-slide">
+      <button class="carousel-nav left" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
+      <div class="carousel-item">
+        <h4 id="carouselTitle">Budget Tracker Setup</h4>
+        <img id="carouselImage" src="assets/images/sample-budget.png" alt="Sample 1">
+        <p id="carouselDesc">A custom-built monthly tracker that auto-categorizes spending and keeps your goals in focus.</p>
+      </div>
+      <button class="carousel-nav right" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <button class="close-btn" onclick="closeCarousel()">Close</button>
   </div>
+</div>
 
   <div id="packages" class="packages">
-    <h2>Packages</h2>
+    <h2>Pricing</h2>
     <div class="pricing-option">
       <strong>Quick Fix - Starts at $29 </strong> 
       One time template or workflow to solve a focused problem fast.
@@ -115,15 +112,19 @@
     </div>
     <div class="pricing-option">
       <strong>Always On – Starts at $49/month</strong>
-     Ongoing coaching, refreshes, hosting, and  tech support — all in one monthly plan.
+      Ongoing coaching, refreshes, hosting, and  tech support — all in one monthly plan.
     </div>
   </div>
+<div class="about-me subtle-section">
+  <p class="about-intro"><i class="fas fa-user"></i> I’m Drew. I've spent 15 years in financial tech building systems for the #1 company on Forbes Global 2000 list. Now I help people build systems that work for life. Sullivan and Co is my way of bringing that same clarity and structure to you and your family.</p>
+</div>
 
   <div class="sample-work">
     <h2>Ready to Take the First Step?</h2>
     <p>Whether you're just starting or refining what already exists, let’s build something better together.</p>
     <button class="sample-btn" data-tally-open="mVa8N6" data-tally-auto-close="8000">Start with a Free Discovery Call</button>
   </div>
+
 
   <img src="assets/images/logo.png" alt="Sullivan and Co. Logo" class="footer-logo">
   <p class="footer-mantra">“it’s never too late to be who you might have been.”</p>

@@ -29,9 +29,9 @@ const carouselData = [
     desc: "Professional-grade personal domain and email workspace — no IT team required."
   },
   {
-    title: "Life Binder Hub",
-    image: "assets/images/sample-folder.png",
-    desc: "A centralized place for storing key documents, accounts, and instructions your future self will thank you for."
+    title: "Wedding Guests to Rolodex",
+    image: "assets/images/wedding.png",
+    desc: "Capture your contacts in one place and use to manage invites, seating charts, and future holiday cards, with a vendor upselling you."
   }
 ];
 

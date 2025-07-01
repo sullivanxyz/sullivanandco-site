@@ -65,3 +65,12 @@ function prevSlide() {
   currentSlide = (currentSlide - 1 + carouselData.length) % carouselData.length;
   updateCarousel();
 }
+
+/* === Google Analytics: Debug & Scroll Tracking === */
+if (window.location.search.includes('debug=drew')) {
+  gtag('set', 'user_properties', { user_type: 'drew_test' });
+}
+gtag('event', 'scroll_depth', {
+  event_category: 'engagement',
+  event_label: '50_percent_scroll'
+});

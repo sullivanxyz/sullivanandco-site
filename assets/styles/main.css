@@ -78,7 +78,15 @@ header {
   text-decoration: none;
   margin-bottom: 0.5rem;
   cursor: pointer;
+  border: 1px solid #000;
+  transition: all 0.2s ease;
 }
+
+.cta-button:hover, .sample-btn:hover {
+  background-color: #fff;
+  color: #000;
+}
+
 .sample-view-btn {
   font-size: 0.9rem;
   padding: 0.3rem 0.75rem;
@@ -88,6 +96,7 @@ header {
   border-radius: 5px;
   cursor: pointer;
 }
+
 .sample-view-btn:hover {
   background-color: #f0f0f0;
   color: #111;
@@ -162,11 +171,19 @@ header {
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+.pricing-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
 .pricing-option strong {
   display: block;
   margin-bottom: 0.5rem;
 }
+
 
 /* === Why Now === */
 .why-now {
@@ -202,8 +219,8 @@ header {
   line-height: 1.5;
   color: #333;
 }
-
 /* === Carousel === */
+/* === [Container] Overlay that darkens screen and centers content === */
 .carousel-overlay {
   display: none;
   position: fixed;
@@ -211,11 +228,13 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.8); /* semi-transparent dark background */
   z-index: 9999;
   align-items: center;
   justify-content: center;
 }
+
+/* === [Modal Box] Main carousel content container === */
 .carousel-content {
   background: #fff;
   padding: 1rem;
@@ -225,25 +244,106 @@ header {
   overflow: hidden;
   text-align: center;
 }
+
+/* === [Header] Section label and title === */
+.carousel-header {
+  margin-bottom: 1rem;
+}
+
+.carousel-section-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  margin-bottom: 0.25rem;
+}
+
+.carousel-project-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* === [Image Strip] (not used in current version but retained for future use) === */
 .carousel-images {
   display: flex;
   gap: 1rem;
   overflow-x: auto;
 }
+
 .carousel-images img {
   width: 200px;
   height: 140px;
   object-fit: cover;
   border-radius: 8px;
 }
-.close-btn {
+
+/* === [Slide Wrapper] Aligns nav + content side by side === */
+.carousel-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   margin-top: 1rem;
-  background: #111;
-  color: #fff;
-  padding: 0.5rem 1rem;
+  position: relative;
+}
+
+/* === [Carousel Item] Individual slide with image and description === */
+.carousel-item {
+  max-width: 500px;
+  text-align: center;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+/* === [Description Card] Framed detail box under image === */
+.carousel-desc-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* === [Navigation Buttons] Left / right arrows === */
+.carousel-nav {
+  background: none;
   border: none;
-  border-radius: 5px;
+  color: #444;
+  font-size: 2rem;
   cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.carousel-nav:hover {
+  color: #000;
+}
+
+/* === [Close Button] Styled to match main site aesthetic === */
+.carousel-close {
+  background: none;
+  border: 1px solid #333;
+  color: #333;
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.carousel-close:hover {
+  background: #333;
+  color: #fff;
 }
 
 /* === Floating CTA === */
@@ -307,6 +407,151 @@ header {
     grid-template-columns: 1fr 1fr;
   }
 }
+/*=== Dark Mode === */
+body {
+  background-color: #ffffff;
+  color: #111111;
+  /* Other light mode defaults */
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #f0f0f0;
+  }
+
+  header {
+    background-color: #1e1e1e;
+    border-bottom: 1px solid #333;
+  }
+
+  .cta-button, .sample-btn {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #fff;
+  }
+
+  .cta-button:hover, .sample-btn:hover {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .sample-view-btn {
+    background-color: #222;
+    color: #eee;
+    border-color: #444;
+  }
+
+  .sample-view-btn:hover {
+    background-color: #333;
+    color: #fff;
+  }
+
+  .clean-section {
+    background: #1e1e1e;
+  }
+
+  .neutral-section {
+    background: #181818;
+  }
+
+  .framed-section {
+    background: #1f1f1f;
+    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05);
+  }
+
+  .icon-box {
+    background: #1e1e1e;
+    box-shadow: none;
+  }
+
+  .icon-box:hover {
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.08);
+  }
+
+  .icon-box i {
+    color: #ccc;
+  }
+  .why-now {
+    background-color: #1e1e1e;
+  }
+
+  .why-item p {
+    color: #ccc;
+  }
+  .floating-cta {
+    background-color: #f0f0f0;
+    color: #121212;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-mantra {
+    color: #bbb;
+  }
+
+  .masthead {
+    color: #999;
+  }
+ .packages {
+    background-color: #1e1e1e;
+  }
+
+  .pricing-option {
+    background: #2a2a2a;
+    border-color: #444;
+  }
+  .subtle-section {
+    color: #ccc;
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #444;
+  }
+  .about-intro i {
+    color: #bbb;
+  }
+  .disclaimer {
+    color: #aaa;
+  } 
+  .carousel-content {
+    background: #1e1e1e;
+    color: #e0e0e0;
+  }
+
+  .carousel-section-label {
+    color: #aaa;
+  }
+
+  .carousel-project-title {
+    color: #f0f0f0;
+  }
+
+  .carousel-item img {
+    /* No change needed for images */
+  }
+
+  .carousel-desc-card {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: #ccc;
+  }
+
+  .carousel-nav {
+    color: #bbb;
+  }
+
+  .carousel-nav:hover {
+    color: #fff;
+  }
+
+  .carousel-close {
+    border-color: #ccc;
+    color: #ccc;
+  }
+
+  .carousel-close:hover {
+    background: #ccc;
+    color: #1e1e1e;
+  }
+}
+
 /* === Messy Unorganized Additions === */
 .sample-link {
   background: none;
@@ -319,9 +564,6 @@ header {
   font-size: 1rem;
 }
 
-.sample-link:hover {
-  color: #005fa3;
-}
 
 .subtle-section {
   padding: 1.5rem 1rem;
@@ -354,38 +596,4 @@ header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.carousel-slide {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  position: relative;
-}
-
-.carousel-item {
-  max-width: 300px;
-  text-align: center;
-}
-
-.carousel-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
-}
-
-.carousel-nav {
-  background: none;
-  border: none;
-  color: #444;
-  font-size: 2rem;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.carousel-nav:hover {
-  color: #000;
 }

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAO Memory Trainer</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        nav {
+            width: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        nav button.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .hidden { display: none !important; }
+
+        /* Flashcard Styles */
+        .card-container {
+            perspective: 1000px;
+            height: 300px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            border-radius: 15px;
+        }
+
+        .card.is-flipped { transform: rotateY(180deg); }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            background: var(--card-bg);
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-back { transform: rotateY(180deg); padding: 20px; box-sizing: border-box; }
+
+        .suit-red { color: #ef4444; }
+        .suit-black { color: #1e293b; }
+        .card-rank { font-size: 5rem; font-weight: bold; }
+        .pa-display { font-size: 1.2rem; line-height: 1.5; }
+
+        /* Settings & Form */
+        .controls, .edit-list {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .checkbox-group {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+        }
+
+        button.action-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 18px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .edit-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .edit-row input {
+            flex: 1;
+            min-width: 80px;
+            padding: 5px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .edit-row label { width: 100%; text-align: left; font-weight: bold; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <button id="nav-practice" class="active" onclick="showTab('practice')">Practice</button>
+    <button id="nav-edit" onclick="showTab('edit')">Edit PAO</button>
+</nav>
+
+<div id="practice-tab" class="container">
+    <div class="controls">
+        <div class="checkbox-group">
+            <label><input type="checkbox" id="showP" checked> Person</label>
+            <label><input type="checkbox" id="showA" checked> Action</label>
+            <label><input type="checkbox" id="showO" checked> Object</label>
+        </div>
+    </div>
+
+    <div class="card-container" onclick="this.querySelector('.card').classList.toggle('is-flipped')">
+        <div class="card" id="main-card">
+            <div class="card-face card-front" id="card-front-val">
+                Select Next
+            </div>
+            <div class="card-face card-back" id="card-back-val">
+                </div>
+        </div>
+    </div>
+
+    <button class="action-btn" onclick="drawCard()">Next Card</button>
+</div>
+
+<div id="edit-tab" class="container hidden">
+    <div class="edit-list" id="editor-container">
+        <p>Loading Editor...</p>
+    </div>
+    <button class="action-btn" onclick="saveData()">Save Changes</button>
+</div>
+
+<script>
+    const suits = ['♠', '♥', '♣', '♦'];
+    const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+    let paoData = {};
+
+    // Initialize or Load Data
+    function initData() {
+        const saved = localStorage.getItem('pao_storage');
+        if (saved) {
+            paoData = JSON.parse(saved);
+        } else {
+            // Seed default data
+            suits.forEach(s => {
+                ranks.forEach(r => {
+                    paoData[`${r}${s}`] = { p: `Person ${r}${s}`, a: `Action ${r}${s}`, o: `Object ${r}${s}` };
+                });
+            });
+        }
+    }
+
+    function showTab(tab) {
+        document.getElementById('practice-tab').classList.toggle('hidden', tab !== 'practice');
+        document.getElementById('edit-tab').classList.toggle('hidden', tab !== 'edit');
+        document.getElementById('nav-practice').classList.toggle('active', tab === 'practice');
+        document.getElementById('nav-edit').classList.toggle('active', tab === 'edit');
+        if(tab === 'edit') renderEditor();
+    }
+
+    function drawCard() {
+        const deck = Object.keys(paoData);
+        const cardKey = deck[Math.floor(Math.random() * deck.length)];
+        const data = paoData[cardKey];
+        const cardEl = document.getElementById('main-card');
+        
+        // Reset flip
+        cardEl.classList.remove('is-flipped');
+        
+        // Update Front
+        const isRed = cardKey.includes('♥') || cardKey.includes('♦');
+        const front = document.getElementById('card-front-val');
+        front.innerHTML = `<div class="card-rank ${isRed ? 'suit-red' : 'suit-black'}">${cardKey}</div>`;
+
+        // Update Back
+        let backHtml = '<div class="pa-display">';
+        if(document.getElementById('showP').checked) backHtml += `<strong>P:</strong> ${data.p}<br>`;
+        if(document.getElementById('showA').checked) backHtml += `<strong>A:</strong> ${data.a}<br>`;
+        if(document.getElementById('showO').checked) backHtml += `<strong>O:</strong> ${data.o}`;
+        backHtml += '</div>';
+        document.getElementById('card-back-val').innerHTML = backHtml;
+    }
+
+    function renderEditor() {
+        const container = document.getElementById('editor-container');
+        container.innerHTML = '<h3>Edit your PAO list</h3>';
+        Object.keys(paoData).forEach(key => {
+            const row = document.createElement('div');
+            row.className = 'edit-row';
+            row.innerHTML = `
+                <label>${key}</label>
+                <input type="text" value="${paoData[key].p}" onchange="updateVal('${key}', 'p', this.value)" placeholder="Person">
+                <input type="text" value="${paoData[key].a}" onchange="updateVal('${key}', 'a', this.value)" placeholder="Action">
+                <input type="text" value="${paoData[key].o}" onchange="updateVal('${key}', 'o', this.value)" placeholder="Object">
+            `;
+            container.appendChild(row);
+        });
+    }
+
+    function updateVal(card, type, val) {
+        paoData[card][type] = val;
+    }
+
+    function saveData() {
+        localStorage.setItem('pao_storage', JSON.stringify(paoData));
+        alert('Data saved to browser local storage!');
+    }
+
+    // Run
+    initData();
+    drawCard();
+</script>
+
+</body>
+</html>

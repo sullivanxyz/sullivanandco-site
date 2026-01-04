@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Fun Rank Dashboard</title>
+    <style>
+        :root {
+            --p1-clr: #2c3e50; --p2-clr: #1e8449; --p3-clr: #117a8b; --p4-clr: #a04000; --p5-clr: #707b7c;
+            --bg: #f4f7f6; --card: #ffffff; --text: #2d3436;
+        }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); padding: 20px; line-height: 1.4; }
+        .container { max-width: 1300px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        
+        h1 { text-align: center; margin-bottom: 5px; font-weight: 800; color: #1e293b; }
+        .subtitle { text-align: center; color: #64748b; margin-bottom: 30px; font-size: 0.9rem; }
+
+        .tabs { display: flex; gap: 5px; margin-bottom: 25px; background: #e2e8f0; padding: 5px; border-radius: 8px; width: fit-content; margin: 0 auto 30px; }
+        .tab { padding: 8px 20px; cursor: pointer; border: none; background: none; font-weight: 600; border-radius: 6px; color: #64748b; transition: 0.2s; }
+        .tab.active { background: white; color: #1e293b; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* Pillar Definitions Card */
+        .def-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .def-card { background: #fff; padding: 20px; border-radius: 10px; border-left: 6px solid #ccc; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #edf2f7; border-left-width: 6px; }
+        .def-card h4 { margin: 0 0 10px 0; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .def-card p { font-size: 0.85rem; margin: 8px 0; color: #4a5568; }
+        .def-card b { color: #2d3748; }
+        .def-card .phrase { font-style: italic; font-weight: 700; color: #1a202c; margin-top: 12px; padding-top: 10px; border-top: 1px solid #edf2f7; font-size: 0.95rem; }
+
+        /* Sliders */
+        .control-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background: #f8fafc; padding: 25px; border-radius: 12px; margin-bottom: 30px; border: 1px solid #e2e8f0; }
+        .slider-row { margin-bottom: 12px; }
+        .slider-label { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 800; margin-bottom: 4px; color: #475569; text-transform: uppercase; }
+        input[type="range"] { width: 100%; height: 6px; border-radius: 5px; appearance: none; background: #cbd5e1; outline: none; }
+        
+        /* Table */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { background: #f1f5f9; text-align: left; padding: 12px 15px; font-size: 0.7rem; text-transform: uppercase; color: #64748b; letter-spacing: 1px; }
+        td { padding: 10px 15px; border-bottom: 1px solid #f1f5f9; font-size: 0.95rem; }
+        .score-pill { padding: 4px 10px; border-radius: 4px; color: white; font-weight: 800; font-size: 0.85rem; display: inline-block; min-width: 32px; text-align: center; }
+        .pillar-tag { font-size: 0.65rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; color: white; display: inline-block; }
+        
+        /* Stats Panel */
+        .stats-grid { display: none; background: #fff; border: 1px solid #e2e8f0; border-top: none; }
+        .stats-inner { padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .stats-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+        .filter-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; border-top: 1px dashed #cbd5e1; padding-top: 12px; }
+        .stat-box { font-size: 0.7rem; color: #64748b; text-transform: uppercase; font-weight: 700; }
+        .stat-box span { display: block; font-size: 1rem; color: #1e293b; margin-top: 2px; }
+
+        /* Editor */
+        .editor-table input { width: 45px; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px; text-align: center; font-size: 0.85rem; }
+        .editor-table input[type="text"] { width: 110px; text-align: left; }
+        .editor-table select { font-size: 0.75rem; padding: 2px; border: 1px solid #cbd5e1; border-radius: 4px; background: #fff; }
+        .locked-p { font-size: 0.7rem; font-weight: 700; color: #64748b; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; }
+        .btn-sync { background: #1e293b; color: white; padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; font-weight: 700; float: right; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Name Fun Rank Dashboard</h1>
+    <div class="subtitle">A Holistic Decision Engine for the Sullivan Family</div>
+
+    <div class="tabs">
+        <button id="t-dash" class="tab active" onclick="showTab('dashboard')">Dashboard</button>
+        <button id="t-edit" class="tab" onclick="showTab('editor')">Data Editor (Admin)</button>
+    </div>
+
+    <div id="dashboard" class="section active">
+        <details>
+            <summary style="font-weight:700; cursor:pointer; margin-bottom:20px; color:#1e293b">Pillar Strategy Guide (What / Vibe / Mood / Phrase)</summary>
+            <div class="def-container" id="defContainer"></div>
+        </details>
+
+        <div class="control-panel">
+            <div>
+                <h3 style="margin:0 0 15px 0; font-size:0.9rem; color:#1e293b;">Pillar Importance (Structure)</h3>
+                <div id="pillarSliders"></div>
+            </div>
+            <div>
+                <h3 style="margin:0 0 15px 0; font-size:0.9rem; color:#1e293b;">Filter Importance (The Vibe)</h3>
+                <div id="filterSliders"></div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Nick</th>
+                    <th>Primary Pillar</th>
+                    <th>Score</th>
+                    <th>Stats</th>
+                </tr>
+            </thead>
+            <tbody id="rankBody"></tbody>
+        </table>
+    </div>
+
+    <div id="editor" class="section">
+        <div style="overflow: hidden; margin-bottom: 10px;">
+            <button class="btn-sync" onclick="syncData()">Sync & Update Rank List</button>
+            <p style="font-size: 0.8rem; color:#64748b">Edit base scores (1-10) below. Pillar selection locks to the highest score unless there is a tie.</p>
+        </div>
+        <table class="editor-table">
+            <thead>
+                <tr>
+                    <th>Name</th><th>Nick</th><th>Pillar</th>
+                    <th>P1</th><th>P2</th><th>P3</th><th>P4</th><th>P5</th>
+                    <th>Timeless</th><th>Flow</th><th>QL</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="editorBody"></tbody>
+        </table>
+        <button onclick="addRow()" style="margin-top:20px; padding:8px 15px; cursor:pointer;">+ Add Row</button>
+    </div>
+</div>
+
+<script>
+    const pillarDefs = [
+        {id: 1, name: "Sophisticated Long-Forms", clr: "#2c3e50", what: "Multi-syllabic, historically established first names with a rhythmic cadence.", vibe: "A stately, anchored name that provides a sense of stature and authority while still offering clippable nicknames.", mood: "Substantial, Regal, Melodic", phrase: "The Grand Protagonist."},
+        {id: 2, name: "Surname-Inspired", clr: "#1e8449", what: "Tailored, patronymic, or occupational family names repurposed as given names.", vibe: "A polished, 'legacy-driven' choice that suggests a heritage of influence and a strong established backbone.", mood: "Tailored, Preppy, Elite", phrase: "The Distinguished Heir."},
+        {id: 3, name: "Nature-Botanicals", clr: "#117a8b", what: "Nouns derived from the natural world that feel curated and intentional.", vibe: "An organic yet high-end choice that suggest an innate style and a clean but not crunchy connection to the world.", mood: "Chic, Luminous, Effortless", phrase: "The Sophisticated Original."},
+        {id: 4, name: "Vintage Heirlooms", clr: "#a04000", what: "Classic names or established diminutives popular in the late 19th/early 20th century.", vibe: "A high-personality choice that balances historic charm with a spunky, approachable energy.", mood: "Warm, Spirited, Classic-Cool", phrase: "The Country Club Firecracker."},
+        {id: 5, name: "Modern Neutrals", clr: "#707b7c", what: "Sleek, fresh names with no clear gender bias that have gained prominence without being trendy.", vibe: "A sharp, no-nonsense choice that emphasizes clean, functional elegance and a lack of unnecessary frills.", mood: "Crisp, Kinetic, Fluent", phrase: "The Minimalist Vanguard."}
+    ];
+
+    // THE FULL LIST (36 Names)
+    let nameData = [
+        {n:"Marigold", nk:"Goldie", s:[10,5,9,8,4,9,10,9], p:1},
+        {n:"Ellis", nk:"—", s:[4,6,5,4,10,9,10,9], p:5},
+        {n:"Collins", nk:"Ollie", s:[5,10,4,4,8,8,10,10], p:2},
+        {n:"Merritt", nk:"Merry", s:[5,10,4,4,9,9,8,9], p:2},
+        {n:"Rhodes", nk:"Rhodi", s:[5,10,6,4,8,9,9,10], p:2},
+        {n:"Banks", nk:"—", s:[4,10,5,4,9,7,10,10], p:2},
+        {n:"Greer", nk:"—", s:[4,10,4,4,8,9,9,10], p:2},
+        {n:"Clarke", nk:"—", s:[3,7,4,4,10,10,9,9], p:5},
+        {n:"Arden", nk:"—", s:[4,6,10,4,7,8,8,8], p:3},
+        {n:"Hayes", nk:"—", s:[3,10,5,4,8,7,8,8], p:2},
+        {n:"Nell", nk:"—", s:[4,4,4,10,6,10,9,8], p:4},
+        {n:"Wren", nk:"—", s:[3,4,10,4,7,7,8,8], p:3},
+        {n:"Pippa", nk:"Pip", s:[4,4,5,10,5,7,9,7], p:4},
+        {n:"Campbell", nk:"Cami", s:[4,10,4,5,7,8,8,8], p:2},
+        {n:"Sutton", nk:"—", s:[3,10,4,4,8,6,7,8], p:2},
+        {n:"Bellamy", nk:"Billie", s:[10,6,4,5,5,7,9,7], p:1},
+        {n:"Beckett", nk:"Beck", s:[4,10,4,4,7,6,8,7], p:2},
+        {n:"Dahlia", nk:"Dolly", s:[8,4,10,6,4,8,8,7], p:3},
+        {n:"Rowan", nk:"—", s:[3,6,10,4,7,7,8,6], p:3},
+        {n:"Cora", nk:"—", s:[4,3,4,10,4,10,8,6], p:4},
+        {n:"Ruby", nk:"—", s:[4,3,4,10,4,10,8,6], p:4},
+        {n:"Leighton", nk:"Leigh", s:[4,10,4,4,8,5,7,7], p:2},
+        {n:"Fallon", nk:"—", s:[4,10,4,4,6,6,7,6], p:2},
+        {n:"Briar", nk:"—", s:[3,5,10,5,6,6,7,6], p:3},
+        {n:"Arlo", nk:"—", s:[3,5,6,5,10,6,7,5], p:5},
+        {n:"Poppy", nk:"—", s:[3,4,10,8,4,5,8,5], p:3},
+        {n:"Collette", nk:"Etta", s:[7,4,4,10,4,9,7,7], p:4},
+        {n:"Edie", nk:"—", s:[4,3,4,10,5,6,8,5], p:4},
+        {n:"Andie", nk:"—", s:[3,4,4,5,10,4,8,4], p:5},
+        {n:"Elliot", nk:"El", s:[4,5,4,4,10,5,7,4], p:5},
+        {n:"Parker", nk:"—", s:[3,10,4,4,7,4,7,4], p:2},
+        {n:"Westscott", nk:"Scottie", s:[4,10,4,4,5,4,6,4], p:2},
+        {n:"Kensington", nk:"Kenzie", s:[10,6,4,4,4,3,4,3], p:1},
+        {n:"Dempsey", nk:"—", s:[3,10,4,4,5,3,6,3], p:2},
+        {n:"Goldwyn", nk:"Goldie", s:[5,10,4,6,4,3,5,3], p:2},
+        {n:"Ayv", nk:"—", s:[3,3,6,4,10,1,6,3], p:5}
+    ];
+
+    const w = { p1:5, p2:5, p3:5, p4:5, p5:5, t:5, f:5, ql:5 };
+
+    function init() {
+        renderDefs();
+        renderSliders();
+        renderEditor();
+        calc();
+    }
+
+    function renderDefs() {
+        document.getElementById('defContainer').innerHTML = pillarDefs.map(d => `
+            <div class="def-card" style="border-color:${d.clr}">
+                <h4 style="color:${d.clr}">${d.name}</h4>
+                <p><b>What:</b> ${d.what}</p>
+                <p><b>Vibe:</b> ${d.vibe}</p>
+                <p><b>Mood:</b> ${d.mood}</p>
+                <div class="phrase">${d.phrase}</div>
+            </div>
+        `).join('');
+    }
+
+    function renderSliders() {
+        const labels = {p1:"1. Sophisticated Long-Form", p2:"2. Surname-Inspired", p3:"3. Nature-Botanical", p4:"4. Vintage Heirloom", p5:"5. Modern Neutral", t:"Timelessness", f:"Sullivan Flow", ql:"Quiet Luxury"};
+        const colors = [pillarDefs[0].clr, pillarDefs[1].clr, pillarDefs[2].clr, pillarDefs[3].clr, pillarDefs[4].clr, "#f39c12", "#f39c12", "#f39c12"];
+        const keys = Object.keys(w);
+        
+        document.getElementById('pillarSliders').innerHTML = keys.slice(0,5).map((k,i) => sliderHTML(k, labels[k], colors[i])).join('');
+        document.getElementById('filterSliders').innerHTML = keys.slice(5).map((k,i) => sliderHTML(k, labels[k], colors[i+5])).join('');
+    }
+
+    function sliderHTML(id, label, clr) {
+        return `<div class="slider-row"><div class="slider-label"><span>${label}</span><span id="v_${id}">5</span></div>
+                <input type="range" id="in_${id}" min="1" max="10" value="5" oninput="upW('${id}', this.value)" style="accent-color:${clr}"></div>`;
+    }
+
+    function upW(id, v) { w[id] = parseInt(v); document.getElementById(`v_${id}`).innerText = v; calc(); }
+
+    function getHsl(score) { return `hsl(${(score * 12)}, 75%, 40%)`; }
+
+    function calc() {
+        const tw = Object.values(w).reduce((a,b)=>a+b,0);
+        const res = nameData.map((d, i) => {
+            const sum = (d.s[0]*w.p1)+(d.s[1]*w.p2)+(d.s[2]*w.p3)+(d.s[3]*w.p4)+(d.s[4]*w.p5)+(d.s[5]*w.t)+(d.s[6]*w.f)+(d.s[7]*w.ql);
+            return {...d, score: (sum/tw).toFixed(1), id: i};
+        }).sort((a,b) => b.score - a.score);
+        renderDash(res);
+    }
+
+    function renderDash(list) {
+        document.getElementById('rankBody').innerHTML = list.map(d => {
+            const p = pillarDefs.find(pd => pd.id === d.p);
+            return `<tr><td style="font-weight:700">${d.n}</td><td>${d.nk}</td><td><span class="pillar-tag" style="background:${p.clr}">${p.name}</span></td>
+                    <td><span class="score-pill" style="background:${getHsl(d.score)}">${d.score}</span></td>
+                    <td><button onclick="toggle(${d.id})" style="cursor:pointer; font-size:0.7rem; padding:4px 8px; border:1px solid #ddd; border-radius:4px;">Stats</button></td></tr>
+                    <tr id="s-${d.id}" class="stats-grid"><td colspan="5"><div class="stats-inner">
+                    <div class="stats-row">${d.s.slice(0,5).map((s,i)=>`<div class="stat-box">${pillarDefs[i].name.split(' ')[0]}<span>${s}</span></div>`).join('')}</div>
+                    <div class="filter-row"><div class="stat-box">Timeless<span>${d.s[5]}</span></div><div class="stat-box">Flow<span>${d.s[6]}</span></div><div class="stat-box">Luxury<span>${d.s[7]}</span></div></div>
+                    </div></td></tr>`;
+        }).join('');
+    }
+
+    function toggle(id) { const el = document.getElementById(`s-${id}`); el.style.display = (el.style.display==='table-row')?'none':'table-row'; }
+
+    // EDITOR & SMART LOCK
+    function renderEditor() {
+        document.getElementById('editorBody').innerHTML = nameData.map((d, i) => {
+            const maxVal = Math.max(...d.s.slice(0,5));
+            const ties = d.s.slice(0,5).filter(x => x === maxVal).length;
+            let pCell = '';
+            
+            if (ties > 1) {
+                pCell = `<select onchange="nameData[${i}].p = parseInt(this.value)">` + 
+                    d.s.slice(0,5).map((s, si) => s === maxVal ? `<option value="${si+1}" ${d.p === si+1 ? 'selected' : ''}>${pillarDefs[si].name}</option>` : '').join('') + `</select>`;
+            } else {
+                const autoP = d.s.slice(0,5).indexOf(maxVal) + 1;
+                nameData[i].p = autoP;
+                pCell = `<span class="locked-p">${pillarDefs[autoP-1].name}</span>`;
+            }
+
+            return `<tr><td><input type="text" value="${d.n}" onchange="nameData[${i}].n=this.value"></td>
+                    <td><input type="text" value="${d.nk}" onchange="nameData[${i}].nk=this.value"></td>
+                    <td>${pCell}</td>
+                    ${d.s.map((s, si) => `<td><input type="number" value="${s}" onchange="nameData[${i}].s[${si}]=parseInt(this.value); renderEditor();"></td>`).join('')}
+                    <td><button onclick="nameData.splice(${i},1); renderEditor();" style="color:red; border:none; background:none; cursor:pointer;">X</button></td></tr>`;
+        }).join('');
+    }
+
+    function addRow() { nameData.push({n:"New Name", nk:"—", s:[5,5,5,5,5,5,5,5], p:2}); renderEditor(); }
+    
+    function showTab(id) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        document.getElementById(id === 'dashboard' ? 't-dash' : 't-edit').classList.add('active');
+    }
+
+    function syncData() { calc(); showTab('dashboard'); }
+
+    init();
+</script>
+</body>
+</html>

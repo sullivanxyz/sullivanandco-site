@@ -3,172 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAO Memory Trainer</title>
+    <title>PAO Master Trainer</title>
     <style>
-        :root {
-            --primary: #2563eb;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text: #1e293b;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        nav {
-            width: 100%;
-            background: #fff;
-            display: flex;
-            justify-content: center;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 10px 0;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        nav button {
-            background: none;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: 600;
-            color: #64748b;
-        }
-
-        nav button.active {
-            color: var(--primary);
-            border-bottom: 2px solid var(--primary);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 500px;
-            margin: 20px auto;
-            text-align: center;
-        }
-
+        :root { --primary: #2563eb; --bg: #f1f5f9; --card-bg: #ffffff; --text: #0f172a; }
+        body { font-family: -apple-system, system-ui, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        nav { width: 100%; background: #fff; display: flex; justify-content: center; border-bottom: 1px solid #e2e8f0; padding: 10px 0; position: sticky; top: 0; z-index: 10; }
+        nav button { background: none; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; font-weight: 600; color: #64748b; }
+        nav button.active { color: var(--primary); border-bottom: 2px solid var(--primary); }
+        .container { width: 95%; max-width: 500px; margin: 20px auto; text-align: center; }
         .hidden { display: none !important; }
-
-        /* Flashcard Styles */
-        .card-container {
-            perspective: 1000px;
-            height: 300px;
-            margin-bottom: 20px;
-            cursor: pointer;
-        }
-
-        .card {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            border-radius: 15px;
-        }
-
+        .card-container { perspective: 1000px; height: 350px; margin-bottom: 20px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+        .card { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.5s; transform-style: preserve-3d; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-radius: 20px; }
         .card.is-flipped { transform: rotateY(180deg); }
-
-        .card-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: 15px;
-            background: var(--card-bg);
-            border: 1px solid #e2e8f0;
-        }
-
+        .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 20px; background: var(--card-bg); border: 1px solid #e2e8f0; }
         .card-back { transform: rotateY(180deg); padding: 20px; box-sizing: border-box; }
-
         .suit-red { color: #ef4444; }
         .suit-black { color: #1e293b; }
-        .card-rank { font-size: 5rem; font-weight: bold; }
-        .pa-display { font-size: 1.2rem; line-height: 1.5; }
-
-        /* Settings & Form */
-        .controls, .edit-list {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .checkbox-group {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 15px;
-        }
-
-        button.action-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 18px;
-            width: 100%;
-            cursor: pointer;
-        }
-
-        .edit-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            padding: 10px 0;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .edit-row input {
-            flex: 1;
-            min-width: 80px;
-            padding: 5px;
-            border: 1px solid #cbd5e1;
-            border-radius: 4px;
-        }
-
-        .edit-row label { width: 100%; text-align: left; font-weight: bold; font-size: 0.8rem; }
+        .card-rank { font-size: 6rem; font-weight: 800; line-height: 1; }
+        .pao-row { margin: 10px 0; font-size: 1.1rem; text-align: left; width: 80%; }
+        .pao-label { font-weight: bold; color: var(--primary); font-size: 0.8rem; text-transform: uppercase; display: block; }
+        .controls { background: white; padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #e2e8f0; display: flex; justify-content: space-around; }
+        .action-btn { background: var(--primary); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 1.2rem; font-weight: bold; width: 100%; cursor: pointer; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2); }
+        .hint { font-size: 0.9rem; color: #64748b; font-style: italic; margin-top: 15px; }
+        .edit-row { background: white; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #e2e8f0; text-align: left; }
+        .edit-row input { width: 90%; margin: 5px 0; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; display: block; }
     </style>
 </head>
 <body>
 
 <nav>
     <button id="nav-practice" class="active" onclick="showTab('practice')">Practice</button>
-    <button id="nav-edit" onclick="showTab('edit')">Edit PAO</button>
+    <button id="nav-edit" onclick="showTab('edit')">View/Edit List</button>
 </nav>
 
 <div id="practice-tab" class="container">
     <div class="controls">
-        <div class="checkbox-group">
-            <label><input type="checkbox" id="showP" checked> Person</label>
-            <label><input type="checkbox" id="showA" checked> Action</label>
-            <label><input type="checkbox" id="showO" checked> Object</label>
-        </div>
+        <label><input type="checkbox" id="showP" checked> P</label>
+        <label><input type="checkbox" id="showA" checked> A</label>
+        <label><input type="checkbox" id="showO" checked> O</label>
     </div>
 
     <div class="card-container" onclick="this.querySelector('.card').classList.toggle('is-flipped')">
         <div class="card" id="main-card">
-            <div class="card-face card-front" id="card-front-val">
-                Select Next
+            <div class="card-face">
+                <div id="card-front-val" class="card-rank">?</div>
+                <div style="margin-top:20px; color:#94a3b8">Tap to Flip</div>
             </div>
-            <div class="card-face card-back" id="card-back-val">
-                </div>
+            <div class="card-face card-back" id="card-back-val"></div>
         </div>
     </div>
 
@@ -176,30 +57,76 @@
 </div>
 
 <div id="edit-tab" class="container hidden">
-    <div class="edit-list" id="editor-container">
-        <p>Loading Editor...</p>
-    </div>
-    <button class="action-btn" onclick="saveData()">Save Changes</button>
+    <button class="action-btn" style="margin-bottom:20px" onclick="saveToLocal()">Save Changes to this Device</button>
+    <div id="editor-container"></div>
 </div>
 
 <script>
-    const suits = ['♠', '♥', '♣', '♦'];
-    const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-    let paoData = {};
+    const masterPAO = {
+        // SPADES: Sports
+        "A♠": {p:"Tom Brady", a:"throwing", o:"football", h:"Goat"},
+        "2♠": {p:"Michael Phelps", a:"swimming", o:"goggles", h:"2nd goat? Arms?"},
+        "3♠": {p:"Steph Curry", a:"deep launching", o:"basketball", h:"3 pointer"},
+        "4♠": {p:"Tiger Woods", a:"swinging", o:"golf club", h:"Fore"},
+        "5♠": {p:"Roger Federer", a:"backhand slicing", o:"racquet", h:"(F)ive and (F)ederer"},
+        "6♠": {p:"Lionel Messi", a:"nutmegging", o:"soccer ball", h:"6 sided ball"},
+        "7♠": {p:"Helio Castroneves", a:"climbing fence", o:"checkered flag", h:"His number in your head"},
+        "8♠": {p:"Jalen Hurts", a:"tush pushing", o:"helmet", h:"(E)ight (E)agles"},
+        "9♠": {p:"Bryce Harper", a:"flipping", o:"baseball bat", h:"Innings"},
+        "10♠": {p:"Floyd Mayweather", a:"jabbing", o:"boxing glove", h:"Scorecard"},
+        "J♠": {p:"Joey Chestnut", a:"stuffing", o:"hot dog", h:"J man"},
+        "Q♠": {p:"Serena Williams", a:"overhead tossing", o:"tennis ball", h:"Queen"},
+        "K♠": {p:"Lebron James", a:"blocking shot", o:"backboard", h:"King"},
+        // HEARTS: Culture
+        "A♥": {p:"George Clooney", a:"sipping", o:"whiskey", h:"Your Ace"},
+        "2♥": {p:"Tom Cruise", a:"sprinting", o:"fighter jet", h:"A list star"},
+        "3♥": {p:"Will Smith", a:"eating", o:"spaghetti", h:"Action star"},
+        "4♥": {p:"Steve Carell", a:"yelling", o:"coffee mug", h:"Movie and Tv star"},
+        "5♥": {p:"Jeff Probst", a:"snuffing", o:"tiki torch", h:"Tv male"},
+        "6♥": {p:"Lisa Vanderpump", a:"petting", o:"toy dog", h:"Reality TV"},
+        "7♥": {p:"Sofia Vergara", a:"ordering", o:"baby cheese", h:"Regal TV"},
+        "8♥": {p:"Ariana Grande", a:"belting", o:"fairy wand", h:"Drama classy"},
+        "9♥": {p:"Eminem", a:"rapping", o:"microphone", h:"Wanna be music"},
+        "10♥": {p:"Bruno Mars", a:"drumming", o:"bass drum", h:"Modern male music"},
+        "J♥": {p:"Elton John", a:"jamming", o:"piano", h:"Talented music"},
+        "Q♥": {p:"Lady Gaga", a:"dancing", o:"monster costume", h:"Over top music queen"},
+        "K♥": {p:"Elvis Presley", a:"raising hands", o:"jeweled cape", h:"Iconic king"},
+        // CLUBS: Characters
+        "A♣": {p:"Harry Potter", a:"catching", o:"golden snitch", h:"Your icon character"},
+        "2♣": {p:"Gandalf", a:"slamming", o:"staff", h:"Fantasy book"},
+        "3♣": {p:"Sherlock Holmes", a:"spotlighting", o:"magnifying glass", h:"Classic book"},
+        "4♣": {p:"Batman", a:"bataranging", o:"grappling hook", h:"Classic character"},
+        "5♣": {p:"Scooby Doo", a:"sniffing", o:"giant sandwich", h:"Mystery cartoon"},
+        "6♣": {p:"Spongebob", a:"flipping", o:"spatula", h:"Saturday cartoon"},
+        "7♣": {p:"Pikachu", a:"zapping", o:"lightning bolt", h:"Yellow kids character"},
+        "8♣": {p:"Mario", a:"jumping", o:"power flower", h:"Game character"},
+        "9♣": {p:"Homer Simpson", a:"eating", o:"donut", h:"90s character"},
+        "10♣": {p:"Grinch", a:"sledding", o:"christmas tree", h:"Rude men"},
+        "J♣": {p:"Buzz Lightyear", a:"blasting", o:"laser", h:"Childhood memory"},
+        "Q♣": {p:"Jasmine", a:"soaring", o:"magic carpet", h:"Disney queen"},
+        "K♣": {p:"Darth Vader", a:"dueling", o:"red lightsaber", h:"Disney king"},
+        // DIAMONDS: Gems
+        "A♦": {p:"Barack Obama", a:"speaking", o:"presidential podium", h:"Your ace icon"},
+        "2♦": {p:"Abraham Lincoln", a:"tipping", o:"top hat", h:"Civil rights president"},
+        "3♦": {p:"George Washington", a:"paddling", o:"wooden rowboat", h:"Mount rushmore"},
+        "4♦": {p:"Ben Franklin", a:"flying", o:"kite with key", h:"Revolutionary era"},
+        "5♦": {p:"Nikola Tesla", a:"electrifying", o:"coil tower", h:"Inventor"},
+        "6♦": {p:"Albert Einstein", a:"writing equations", o:"chalkboard", h:"War era smart"},
+        "7♦": {p:"Stephen Hawking", a:"typing", o:"talking computer", h:"Genius"},
+        "8♦": {p:"Neil Armstrong", a:"moonwalking", o:"spacesuit", h:"Space explore"},
+        "9♦": {p:"Elon Musk", a:"launching", o:"rocket", h:"Space mogul"},
+        "10♦": {p:"Steve Jobs", a:"presenting", o:"iPhone", h:"Cult mogul"},
+        "J♦": {p:"Martha Stewart", a:"arranging", o:"flowers", h:"2000s success"},
+        "Q♦": {p:"Oprah", a:"giving away", o:"cars", h:"Female success"},
+        "K♦": {p:"MLK", a:"marching", o:"bridge", h:"AA king"}
+    };
 
-    // Initialize or Load Data
-    function initData() {
-        const saved = localStorage.getItem('pao_storage');
-        if (saved) {
-            paoData = JSON.parse(saved);
-        } else {
-            // Seed default data
-            suits.forEach(s => {
-                ranks.forEach(r => {
-                    paoData[`${r}${s}`] = { p: `Person ${r}${s}`, a: `Action ${r}${s}`, o: `Object ${r}${s}` };
-                });
-            });
-        }
+    let activeData = {};
+
+    function init() {
+        const saved = localStorage.getItem('pao_user_data');
+        activeData = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(masterPAO));
+        drawCard();
     }
 
     function showTab(tab) {
@@ -211,57 +138,41 @@
     }
 
     function drawCard() {
-        const deck = Object.keys(paoData);
+        const deck = Object.keys(activeData);
         const cardKey = deck[Math.floor(Math.random() * deck.length)];
-        const data = paoData[cardKey];
-        const cardEl = document.getElementById('main-card');
-        
-        // Reset flip
-        cardEl.classList.remove('is-flipped');
-        
-        // Update Front
+        const data = activeData[cardKey];
         const isRed = cardKey.includes('♥') || cardKey.includes('♦');
-        const front = document.getElementById('card-front-val');
-        front.innerHTML = `<div class="card-rank ${isRed ? 'suit-red' : 'suit-black'}">${cardKey}</div>`;
+        
+        document.getElementById('main-card').classList.remove('is-flipped');
+        document.getElementById('card-front-val').innerHTML = `<span class="${isRed?'suit-red':'suit-black'}">${cardKey}</span>`;
 
-        // Update Back
-        let backHtml = '<div class="pa-display">';
-        if(document.getElementById('showP').checked) backHtml += `<strong>P:</strong> ${data.p}<br>`;
-        if(document.getElementById('showA').checked) backHtml += `<strong>A:</strong> ${data.a}<br>`;
-        if(document.getElementById('showO').checked) backHtml += `<strong>O:</strong> ${data.o}`;
-        backHtml += '</div>';
-        document.getElementById('card-back-val').innerHTML = backHtml;
+        let html = '';
+        if(document.getElementById('showP').checked) html += `<div class="pao-row"><span class="pao-label">Person</span>${data.p}</div>`;
+        if(document.getElementById('showA').checked) html += `<div class="pao-row"><span class="pao-label">Action</span>${data.a}</div>`;
+        if(document.getElementById('showO').checked) html += `<div class="pao-row"><span class="pao-label">Object</span>${data.o}</div>`;
+        html += `<div class="hint">${data.h}</div>`;
+        
+        document.getElementById('card-back-val').innerHTML = html;
     }
 
     function renderEditor() {
         const container = document.getElementById('editor-container');
-        container.innerHTML = '<h3>Edit your PAO list</h3>';
-        Object.keys(paoData).forEach(key => {
-            const row = document.createElement('div');
-            row.className = 'edit-row';
-            row.innerHTML = `
-                <label>${key}</label>
-                <input type="text" value="${paoData[key].p}" onchange="updateVal('${key}', 'p', this.value)" placeholder="Person">
-                <input type="text" value="${paoData[key].a}" onchange="updateVal('${key}', 'a', this.value)" placeholder="Action">
-                <input type="text" value="${paoData[key].o}" onchange="updateVal('${key}', 'o', this.value)" placeholder="Object">
-            `;
-            container.appendChild(row);
+        container.innerHTML = '<h2>Your PAO List</h2>';
+        Object.keys(activeData).forEach(key => {
+            const div = document.createElement('div');
+            div.className = 'edit-row';
+            div.innerHTML = `<strong>${key}</strong>
+                <input type="text" value="${activeData[key].p}" oninput="updateItem('${key}','p',this.value)">
+                <input type="text" value="${activeData[key].a}" oninput="updateItem('${key}','a',this.value)">
+                <input type="text" value="${activeData[key].o}" oninput="updateItem('${key}','o',this.value)">`;
+            container.appendChild(div);
         });
     }
 
-    function updateVal(card, type, val) {
-        paoData[card][type] = val;
-    }
+    function updateItem(k, field, val) { activeData[k][field] = val; }
+    function saveToLocal() { localStorage.setItem('pao_user_data', JSON.stringify(activeData)); alert('Saved to this device!'); }
 
-    function saveData() {
-        localStorage.setItem('pao_storage', JSON.stringify(paoData));
-        alert('Data saved to browser local storage!');
-    }
-
-    // Run
-    initData();
-    drawCard();
+    init();
 </script>
-
 </body>
 </html>

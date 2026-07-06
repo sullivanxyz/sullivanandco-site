@@ -11,10 +11,38 @@ body {
 }
 h1, h2, h3 {
   margin-bottom: 0.5rem;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+h1 {
+  font-size: 2rem;
 }
 .subheadline {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
+  color: #555;
+}
+
+/* === Hero === */
+.hero {
+  text-align: center;
+  padding: 2.5rem 0 3rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.hero .disclaimer {
+  margin-bottom: 0;
+}
+@media (min-width: 768px) {
+  .hero {
+    padding: 4rem 0 4.5rem;
+  }
+  .hero h1 {
+    font-size: 3rem;
+  }
+  .hero .subheadline {
+    font-size: 1.25rem;
+  }
 }
 
 
@@ -35,6 +63,10 @@ header {
 .menu-icon {
   font-size: 1.5rem;
   cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0.25rem 0.5rem;
 }
 .menu {
   display: none;
@@ -65,6 +97,14 @@ header {
 /* === Container Layout === */
 .container {
   padding: 6rem 1.5rem 1.5rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.section-subtitle {
+  color: #666;
+  margin: 0 0 1.5rem;
+  font-size: 0.98rem;
+  line-height: 1.5;
 }
 
 /* === CTA and Buttons === */
@@ -127,26 +167,51 @@ header {
 /* === Resources Grid === */
 .grid-icons {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.2rem;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .grid-icons {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
 }
 .icon-box {
   display: flex;
   gap: 0.75rem;
   background: #fff;
   padding: 1rem;
+  border: 1px solid #e2e2e2;
   border-radius: 10px;
   align-items: flex-start;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  /* button reset — boxes deep-link to showcase demos */
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  width: 100%;
+  line-height: 1.45;
 }
 .icon-box:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  border-color: #999;
 }
 .icon-box i {
   font-size: 1.4rem;
   margin-top: 0.2rem;
   color: #444;
+}
+.icon-box-hint {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #888;
+}
+.icon-box:hover .icon-box-hint {
+  color: #111;
 }
 
 /* === Section Content Blocks === */
@@ -167,11 +232,15 @@ header {
 /* === Pricing === */
 .pricing-option {
   background: #fff;
-  border: 1px solid #ccc;
-  padding: 1rem;
-  border-radius: 8px;
+  border: 1px solid #e2e2e2;
+  padding: 1.15rem 1.25rem;
+  border-radius: 10px;
   margin-bottom: 1rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  line-height: 1.5;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.pricing-option:hover {
+  border-color: #999;
 }
 
 .pricing-option:hover {
@@ -209,6 +278,10 @@ header {
     text-align: left;
   }
 }
+.why-item {
+  border-top: 2px solid #111;
+  padding-top: 1rem;
+}
 .why-item strong {
   display: block;
   font-size: 1rem;
@@ -219,133 +292,6 @@ header {
   line-height: 1.5;
   color: #333;
 }
-/* === Carousel === */
-/* === [Container] Overlay that darkens screen and centers content === */
-.carousel-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8); /* semi-transparent dark background */
-  z-index: 9999;
-  align-items: center;
-  justify-content: center;
-}
-
-/* === [Modal Box] Main carousel content container === */
-.carousel-content {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 10px;
-  max-width: 90%;
-  max-height: 80%;
-  overflow: hidden;
-  text-align: center;
-}
-
-/* === [Header] Section label and title === */
-.carousel-header {
-  margin-bottom: 1rem;
-}
-
-.carousel-section-label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 0.05rem;
-  margin-bottom: 0.25rem;
-}
-
-.carousel-project-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-/* === [Image Strip] (not used in current version but retained for future use) === */
-.carousel-images {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-}
-
-.carousel-images img {
-  width: 200px;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-/* === [Slide Wrapper] Aligns nav + content side by side === */
-.carousel-slide {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  position: relative;
-}
-
-/* === [Carousel Item] Individual slide with image and description === */
-.carousel-item {
-  max-width: 500px;
-  text-align: center;
-}
-
-.carousel-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
-}
-
-/* === [Description Card] Framed detail box under image === */
-.carousel-desc-card {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-  margin-top: 1rem;
-  font-size: 0.95rem;
-  color: #333;
-  line-height: 1.4;
-}
-
-/* === [Navigation Buttons] Left / right arrows === */
-.carousel-nav {
-  background: none;
-  border: none;
-  color: #444;
-  font-size: 2rem;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.carousel-nav:hover {
-  color: #000;
-}
-
-/* === [Close Button] Styled to match main site aesthetic === */
-.carousel-close {
-  background: none;
-  border: 1px solid #333;
-  color: #333;
-  padding: 0.5rem 1.25rem;
-  border-radius: 6px;
-  font-weight: 500;
-  cursor: pointer;
-  margin-top: 1.5rem;
-  transition: all 0.2s ease;
-}
-
-.carousel-close:hover {
-  background: #333;
-  color: #fff;
-}
-
 /* === Floating CTA === */
 .floating-cta {
   display: none;
@@ -459,20 +405,39 @@ body {
     box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05);
   }
 
+  .subheadline {
+    color: #b5b5b5;
+  }
+
   .icon-box {
     background: #1e1e1e;
+    border-color: #333;
     box-shadow: none;
   }
 
   .icon-box:hover {
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.08);
+    border-color: #777;
   }
 
   .icon-box i {
     color: #ccc;
   }
+  .icon-box-hint {
+    color: #888;
+  }
+  .icon-box:hover .icon-box-hint {
+    color: #f0f0f0;
+  }
+  .step-num {
+    background: #f0f0f0;
+    color: #121212;
+  }
   .why-now {
     background-color: #1e1e1e;
+  }
+  .why-item {
+    border-top-color: #f0f0f0;
   }
 
   .why-item p {
@@ -509,46 +474,12 @@ body {
   }
   .disclaimer {
     color: #aaa;
-  } 
-  .carousel-content {
-    background: #1e1e1e;
-    color: #e0e0e0;
   }
-
-  .carousel-section-label {
+  .section-subtitle {
     color: #aaa;
   }
-
-  .carousel-project-title {
-    color: #f0f0f0;
-  }
-
-  .carousel-item img {
-    /* No change needed for images */
-  }
-
-  .carousel-desc-card {
-    background-color: #2a2a2a;
-    border-color: #444;
-    color: #ccc;
-  }
-
-  .carousel-nav {
-    color: #bbb;
-  }
-
-  .carousel-nav:hover {
-    color: #fff;
-  }
-
-  .carousel-close {
-    border-color: #ccc;
-    color: #ccc;
-  }
-
-  .carousel-close:hover {
-    background: #ccc;
-    color: #1e1e1e;
+  .how-it-works-steps {
+    border-left-color: #444;
   }
 }
 
@@ -587,7 +518,20 @@ body {
 .how-it-works-steps {
   margin-left: 1rem;
   padding-left: 1rem;
-  border-left: 2px solid #ddd; 
+  border-left: 2px solid #ddd;
+}
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-right: 0.5rem;
 }
 
 .sample-cta {

@@ -3,11 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sullivan and Co.</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <title>Sullivan and Co — Make Life Work Better</title>
+  <meta name="description" content="Digital coaching and expert setup for busy professionals and families. Budgets, family hubs, milestones — calm, modern systems that make life work better. Start with a free discovery call.">
+  <link rel="canonical" href="https://sullivan.xyz/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sullivan.xyz/">
+  <meta property="og:title" content="Sullivan and Co — Make Life Work Better">
+  <meta property="og:description" content="Digital coaching and expert setup for busy professionals and families. Calm, modern systems that make life work better.">
+  <meta property="og:image" content="https://sullivan.xyz/assets/images/logo.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" href="assets/images/favicon.png" type="image/png">
   <link rel="stylesheet" href="assets/styles/main.css">
+  <link rel="stylesheet" href="assets/styles/showcase.css">
   <script async src="https://tally.so/widgets/embed.js"></script>
 
   <!-- Google Analytics -->
@@ -26,19 +37,22 @@
     <img src="assets/images/favicon.png" alt="icon" class="brand-icon-small">
     <strong>Sullivan and Co</strong>
   </div>
-  <div class="menu-icon" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+  <button class="menu-icon" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false" aria-controls="dropdown-menu"><i class="fas fa-bars"></i></button>
   <div id="dropdown-menu" class="menu">
     <a href="#top">Home</a>
     <a href="#resources">What We Offer</a>
+    <a href="#showcase">Showcase</a>
     <a href="#packages">Pricing</a>
   </div>
 </header>
 
 <div id="top" class="container">
-  <h1>Make Life Work Better.</h1>
-  <p class="subheadline">Upgrade your digital world and live lighter.</p>
-  <button class="cta-button" data-tally-open="mVa8N6" data-tally-auto-close="8000">Get Started Free</button>
-  <p class="disclaimer">No commitment, no stress. Just clarity.</p>
+  <div class="hero">
+    <h1>Make Life Work Better.</h1>
+    <p class="subheadline">Upgrade your digital world and live lighter.</p>
+    <button class="cta-button" data-tally-open="mVa8N6" data-tally-auto-close="8000">Get Started Free</button>
+    <p class="disclaimer">No commitment, no stress. Just clarity.</p>
+  </div>
 
   <div class="why-now">
     <div class="why-now-inner">
@@ -64,61 +78,82 @@
     <h2>What We Offer</h2>
     <p class="section-subtitle">Digital coaching and expert setup for busy professionals and families</p>
     <div class="grid-icons">
-      <div class="icon-box"><i class="fas fa-folder-open"></i><div><strong>Hubs & Workspaces</strong><br>Branded email/websites and HQs that actually work </div></div>
-      <div class="icon-box"><i class="fas fa-piggy-bank"></i><div><strong>Spending & Saving</strong><br>Cash flow tracking and finance automation, aligned to your goals</div></div>
-      <div class="icon-box"><i class="fas fa-check-square"></i><div><strong>Routines & Templates</strong><br>Low-friction tools to own your day, week, and year </div></div>
-      <div class="icon-box"><i class="fas fa-globe"></i><div><strong>Changes & Milestones</strong><br>Plan for life's big changes with systems that grow with you</div></div>
+      <button class="icon-box" data-showcase="dm"><i class="fas fa-folder-open"></i><div><strong>Hubs & Workspaces</strong><br>Branded email/websites and HQs that actually work <span class="icon-box-hint">See it in the showcase →</span></div></button>
+      <button class="icon-box" data-showcase="bg"><i class="fas fa-piggy-bank"></i><div><strong>Spending & Saving</strong><br>Cash flow tracking and finance automation, aligned to your goals<span class="icon-box-hint">See it in the showcase →</span></div></button>
+      <button class="icon-box" data-showcase="nb"><i class="fas fa-check-square"></i><div><strong>Routines & Templates</strong><br>Low-friction tools to own your day, week, and year <span class="icon-box-hint">See it in the showcase →</span></div></button>
+      <button class="icon-box" data-showcase="rx"><i class="fas fa-globe"></i><div><strong>Changes & Milestones</strong><br>Plan for life's big changes with systems that grow with you<span class="icon-box-hint">See it in the showcase →</span></div></button>
     </div>
   </div>
 
   <div class="how-it-works">
     <h3>How It Works</h3>
       <div class="how-it-works-steps">
-        <p><strong>Step 1:</strong> Book a free discovery call.</p>
-        <p><strong>Step 2:</strong> Get a personalized setup plan.</p>
-        <p><strong>Step 3:</strong> Choose one-time help or ongoing support.</p>
+        <p><span class="step-num">1</span> Book a free discovery call.</p>
+        <p><span class="step-num">2</span> Get a personalized setup plan.</p>
+        <p><span class="step-num">3</span> Choose one-time help or ongoing support.</p>
 	<p class="sample-cta">
   	   <em>Curious what this actually looks like?</em>
-  	   <button class="sample-view-btn" onclick="openCarousel()">View </button>
-	</p>      
+  	   <button class="sample-view-btn" onclick="document.getElementById('showcase').scrollIntoView({behavior:'smooth'})">See the showcase</button>
+	</p>
       </div>
   </div>
 
-<div id="carouselOverlay" class="carousel-overlay" onclick="closeCarousel(event)">
-  <div class="carousel-content" onclick="event.stopPropagation()">
-    
-    <!-- Header -->
-    <div class="carousel-header">
-      <div class="carousel-section-label">Sample Projects</div>
-      <h2 class="carousel-project-title" id="carouselTitle">Budget Tracker Setup</h2>
+  <!-- === Showcase: interactive demos === -->
+  <div id="showcase" class="showcase-section">
+    <h2>Built for Us First</h2>
+    <p class="section-subtitle">Every system below started as something I built for my own family. These aren't screenshots — they're working demos. Click around.</p>
+
+    <div class="showcase-tabs" role="tablist">
+      <button class="showcase-tab active" data-panel="rx" role="tab">Wedding Rolodex</button>
+      <button class="showcase-tab" data-panel="bg" role="tab">Family Budget</button>
+      <button class="showcase-tab" data-panel="nb" role="tab">Newborn Log</button>
+      <button class="showcase-tab" data-panel="dm" role="tab">Family Domain</button>
     </div>
 
-    <!-- Carousel Slide -->
-    <div class="carousel-slide">
-      <button class="carousel-nav left" onclick="prevSlide()">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-
-      <div class="carousel-item">
-        <img id="carouselImage" src="assets/images/sample-budget.png" alt="Sample 1">
-
-        <div class="carousel-desc-card">
-          <p id="carouselDesc">
-            A custom-built monthly tracker that auto-categorizes spending and keeps your goals in focus.
-          </p>
-        </div>
+    <!-- Demo 1: Wedding Guest Rolodex -->
+    <div class="showcase-panel active" id="sc-rx" role="tabpanel">
+      <span class="panel-flag">01 · Flagship<span class="flag-badge">Real project</span></span>
+      <h3>Wedding Guest Rolodex</h3>
+      <p class="panel-blurb">Every guest, every table, every relationship — one living list. Pick a table on the left, then tap guests in the web to see their card. Dashed circles are open seats.</p>
+      <div class="demo-frame">
+        <div class="rx-app" id="rxApp"></div>
       </div>
-
-      <button class="carousel-nav right" onclick="nextSlide()">
-        <i class="fas fa-chevron-right"></i>
-      </button>
+      <p class="panel-foot">The original ran a real wedding — six months of RSVPs, one source of truth. It still runs the holiday-card list today. <button class="panel-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000">Build one for yours →</button></p>
     </div>
 
-    <!-- Close Button -->
-    <button class="carousel-close" onclick="closeCarousel()">Close</button>
+    <!-- Demo 2: Family Budget -->
+    <div class="showcase-panel" id="sc-bg" role="tabpanel">
+      <span class="panel-flag">02 · Sample data</span>
+      <h3>The Family Budget, Reframed</h3>
+      <p class="panel-blurb">Not another finance app. Three buckets, a plan mark on every bar, and an honest sentence about the month. Flip between months; open a bucket to see the lines.</p>
+      <div class="demo-frame">
+        <div id="bgApp"></div>
+      </div>
+      <p class="panel-foot">Built on the tools you already have — no new app, no new logins, aligned to your goals. <button class="panel-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000">Set mine up →</button></p>
+    </div>
 
+    <!-- Demo 3: Newborn Log -->
+    <div class="showcase-panel" id="sc-nb" role="tabpanel">
+      <span class="panel-flag">03 · Sample data</span>
+      <h3>Newborn Log</h3>
+      <p class="panel-blurb">Feeds, diapers, sleep — one tap to log at 3am, a clear pattern by breakfast. Try the buttons; the stats and the 24-hour strip update live.</p>
+      <div class="demo-frame">
+        <div id="nbApp"></div>
+      </div>
+      <p class="panel-foot">Designed for one-handed use in the dark, shared between both parents' phones. <button class="panel-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000">Expecting? Let's talk →</button></p>
+    </div>
+
+    <!-- Demo 4: Family Domain -->
+    <div class="showcase-panel" id="sc-dm" role="tabpanel">
+      <span class="panel-flag">04 · Concept<span class="flag-badge">Built to order</span></span>
+      <h3>The Family Domain</h3>
+      <p class="panel-blurb">Your household with its own address. Shared inboxes and lists that end the forwarding chains. Tap an address to see who it reaches.</p>
+      <div class="demo-frame">
+        <div id="dmApp"></div>
+      </div>
+      <p class="panel-foot">This one's a teaser — every family's setup is different. <button class="panel-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000">Claim your name →</button></p>
+    </div>
   </div>
-</div>
 
   <div id="packages" class="packages">
     <h2>Pricing</h2>
@@ -128,7 +163,7 @@
     </div>
     <div class="pricing-option">
       <strong>Full Service Setup – Starts at $99</strong>
-      Custom-built workspace with quick start guide, training, and doumentation for bespoke needs.
+      Custom-built workspace with quick start guide, training, and documentation for bespoke needs.
     </div>
     <div class="pricing-option">
       <strong>Always On – Starts at $49/month</strong>
@@ -154,19 +189,13 @@
 </div>
 
 <!-- Floating CTA -->
-<button id="floatingCTA" class="floating-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000">
+<button id="floatingCTA" class="floating-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000" aria-label="Book a free discovery call">
   <i class="fa-solid fa-paper-plane"></i>
 </button>
 
 <script src="assets/scripts/main.js"></script>
+<script src="assets/scripts/showcase.js"></script>
 <script>
-  function openCarousel() {
-    document.getElementById('carouselOverlay').style.display = 'flex';
-  }
-  function closeCarousel() {
-    document.getElementById('carouselOverlay').style.display = 'none';
-  }
-
   // Scroll-based visibility for floating CTA
   window.addEventListener('scroll', function() {
     const cta = document.getElementById('floatingCTA');

@@ -1,0 +1,526 @@
+/* ==========================================================================
+   Sullivan & Co — Showcase section
+   Self-contained styles for the interactive demo panels.
+   Palette: strictly black / white / grayscale, matching main.css.
+   ========================================================================== */
+
+.showcase-section {
+  --sc-bg: #ffffff;
+  --sc-surface: #f7f7f7;
+  --sc-surface-2: #efefef;
+  --sc-border: #e2e2e2;
+  --sc-border-strong: #c9c9c9;
+  --sc-ink: #111111;
+  --sc-ink-2: #555555;
+  --sc-ink-3: #8a8a8a;
+  --sc-invert-bg: #111111;
+  --sc-invert-ink: #ffffff;
+
+  margin-top: 3rem;
+  scroll-margin-top: 80px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .showcase-section {
+    --sc-bg: #121212;
+    --sc-surface: #1c1c1c;
+    --sc-surface-2: #242424;
+    --sc-border: #333333;
+    --sc-border-strong: #4a4a4a;
+    --sc-ink: #f0f0f0;
+    --sc-ink-2: #ababab;
+    --sc-ink-3: #7d7d7d;
+    --sc-invert-bg: #f0f0f0;
+    --sc-invert-ink: #121212;
+  }
+}
+
+/* --- Tabs ----------------------------------------------------------------- */
+
+.showcase-tabs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.showcase-tabs::-webkit-scrollbar { display: none; }
+
+.showcase-tab {
+  flex: 0 0 auto;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--sc-border-strong);
+  background: var(--sc-bg);
+  color: var(--sc-ink-2);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.showcase-tab:hover { border-color: var(--sc-ink); color: var(--sc-ink); }
+.showcase-tab.active {
+  background: var(--sc-invert-bg);
+  color: var(--sc-invert-ink);
+  border-color: var(--sc-invert-bg);
+}
+
+/* --- Panels ---------------------------------------------------------------- */
+
+.showcase-panel { display: none; }
+.showcase-panel.active { display: block; animation: sc-fade 0.25s ease; }
+
+@keyframes sc-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.panel-flag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sc-ink-3);
+  margin-bottom: 0.35rem;
+}
+.panel-flag .flag-badge {
+  display: inline-block;
+  border: 1px solid var(--sc-border-strong);
+  border-radius: 4px;
+  padding: 0.05rem 0.4rem;
+  margin-left: 0.4rem;
+}
+.showcase-panel h3 { margin: 0 0 0.35rem; font-size: 1.25rem; }
+.panel-blurb {
+  margin: 0 0 1.1rem;
+  color: var(--sc-ink-2);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 620px;
+}
+
+.demo-frame {
+  border: 1px solid var(--sc-border);
+  border-radius: 12px;
+  background: var(--sc-surface);
+  padding: 1.1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.panel-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.9rem;
+  margin: 0.9rem 0 0;
+  font-size: 0.88rem;
+  color: var(--sc-ink-3);
+  line-height: 1.5;
+}
+.panel-cta {
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--sc-ink);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.panel-cta:hover { color: var(--sc-ink-3); }
+
+/* ==========================================================================
+   Demo 1 — Wedding Guest Rolodex  (rx-)
+   ========================================================================== */
+
+.rx-app {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) 1fr;
+  gap: 1.1rem;
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .rx-app { grid-template-columns: 1fr; }
+}
+
+.rx-col-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sc-ink-3);
+  margin: 0 0 0.6rem;
+}
+
+.rx-tables { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.rx-table {
+  font: inherit;
+  text-align: left;
+  background: var(--sc-bg);
+  border: 1px solid var(--sc-border);
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  color: var(--sc-ink);
+}
+.rx-table:hover { border-color: var(--sc-border-strong); }
+.rx-table.active {
+  border-color: var(--sc-ink);
+  box-shadow: 0 0 0 1px var(--sc-ink);
+}
+
+.rx-table-top { display: flex; gap: 0.5rem; align-items: baseline; }
+.rx-table-num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--sc-ink-3);
+}
+.rx-table-name { font-size: 0.88rem; font-weight: 600; line-height: 1.3; }
+
+.rx-tags { margin: 0.35rem 0 0.4rem; display: flex; gap: 0.3rem; }
+.rx-tag {
+  font-size: 0.68rem;
+  font-weight: 500;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: var(--sc-surface-2);
+  color: var(--sc-ink-2);
+}
+
+.rx-seatbar { display: flex; align-items: center; gap: 0.5rem; }
+.rx-seatbar-track {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--sc-surface-2);
+  overflow: hidden;
+}
+.rx-seatbar-fill { height: 100%; background: var(--sc-ink); border-radius: 2px; }
+.rx-seatbar-count { font-size: 0.72rem; color: var(--sc-ink-3); white-space: nowrap; }
+
+.rx-web { min-width: 0; }
+.rx-svg-wrap {
+  background: var(--sc-bg);
+  border: 1px solid var(--sc-border);
+  border-radius: 10px;
+  padding: 0.4rem;
+}
+.rx-svg-wrap svg { display: block; width: 100%; height: auto; }
+
+/* SVG element classes (colors via CSS so dark mode just works) */
+.rx-ring        { fill: var(--sc-surface-2); }
+.rx-node        { fill: var(--sc-bg); stroke: var(--sc-border-strong); stroke-width: 1.5; cursor: pointer; transition: stroke 0.15s ease; }
+.rx-node:hover  { stroke: var(--sc-ink); }
+.rx-node.selected { stroke: var(--sc-ink); stroke-width: 2.5; }
+.rx-node-open   { fill: var(--sc-bg); stroke: var(--sc-border-strong); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.rx-node-label  { fill: var(--sc-ink); font-size: 10px; font-weight: 600; text-anchor: middle; pointer-events: none; }
+.rx-node-plus   { fill: var(--sc-ink-3); font-size: 13px; text-anchor: middle; pointer-events: none; }
+.rx-pill        { fill: var(--sc-ink-2); }
+.rx-pill-label  { fill: var(--sc-bg); font-size: 10px; font-weight: 600; text-anchor: middle; font-style: italic; }
+.rx-mini        { fill: var(--sc-surface); stroke: var(--sc-border-strong); stroke-width: 1.2; cursor: pointer; }
+.rx-mini:hover  { stroke: var(--sc-ink); }
+.rx-mini-label  { fill: var(--sc-ink-2); font-size: 10px; font-weight: 700; text-anchor: middle; pointer-events: none; }
+.rx-mini-name   { fill: var(--sc-ink-3); font-size: 8px; text-anchor: middle; pointer-events: none; }
+.rx-link        { stroke: var(--sc-border-strong); stroke-width: 1; stroke-dasharray: 3 4; fill: none; }
+
+.rx-detail {
+  margin-top: 0.75rem;
+  background: var(--sc-bg);
+  border: 1px solid var(--sc-border);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--sc-ink-2);
+  min-height: 2.4rem;
+}
+.rx-detail strong { color: var(--sc-ink); }
+.rx-detail .rx-detail-meta { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; margin-top: 0.25rem; }
+.rx-detail .rx-check i { margin-right: 0.3rem; color: var(--sc-ink-3); }
+
+/* ==========================================================================
+   Demo 2 — Family Budget  (bg-)
+   ========================================================================== */
+
+.bg-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 0.75rem;
+}
+.bg-month { display: flex; align-items: center; gap: 0.6rem; }
+.bg-month-label { font-weight: 700; font-size: 1rem; min-width: 7.2rem; text-align: center; }
+.bg-nav {
+  font: inherit;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--sc-border-strong);
+  background: var(--sc-bg);
+  color: var(--sc-ink);
+  cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.bg-nav:disabled { opacity: 0.3; cursor: default; }
+.bg-nav:not(:disabled):hover { border-color: var(--sc-ink); }
+
+.bg-stats { display: flex; gap: 1.5rem; text-align: right; }
+.bg-stat-num { font-size: 1.05rem; font-weight: 700; display: block; }
+.bg-stat-num.over { text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+.bg-stat-label { font-size: 0.72rem; color: var(--sc-ink-3); }
+
+.bg-verdict {
+  font-size: 0.85rem;
+  color: var(--sc-ink-2);
+  font-style: italic;
+  margin: -0.4rem 0 1rem;
+}
+
+.bg-buckets { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.bg-bucket {
+  background: var(--sc-bg);
+  border: 1px solid var(--sc-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.bg-bucket-head {
+  font: inherit;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  padding: 0.75rem 0.9rem;
+  cursor: pointer;
+  text-align: left;
+  color: var(--sc-ink);
+}
+.bg-bucket-head:hover { background: var(--sc-surface); }
+.bg-bucket-name { font-weight: 600; font-size: 0.92rem; flex: 0 0 7.2rem; }
+.bg-bucket-name small { display: block; font-weight: 400; font-size: 0.72rem; color: var(--sc-ink-3); }
+
+.bg-bar {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--sc-surface-2);
+  position: relative;
+  overflow: hidden;
+  min-width: 60px;
+}
+.bg-bar-fill { position: absolute; inset: 0 auto 0 0; background: var(--sc-ink-2); border-radius: 4px; }
+.bg-bar-fill.over { background: var(--sc-ink); }
+.bg-bar-plan { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--sc-ink); opacity: 0.5; }
+
+.bg-bucket-nums { font-size: 0.82rem; color: var(--sc-ink-2); white-space: nowrap; }
+.bg-bucket-nums strong { color: var(--sc-ink); }
+.bg-caret { color: var(--sc-ink-3); font-size: 0.75rem; transition: transform 0.15s ease; }
+.bg-bucket.open .bg-caret { transform: rotate(180deg); }
+
+.bg-lines { display: none; border-top: 1px solid var(--sc-border); padding: 0.5rem 0.9rem 0.7rem; }
+.bg-bucket.open .bg-lines { display: block; }
+.bg-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.83rem;
+  color: var(--sc-ink-2);
+  padding: 0.3rem 0;
+}
+.bg-line + .bg-line { border-top: 1px dashed var(--sc-border); }
+
+.bg-principle {
+  margin: 1rem 0 0;
+  font-size: 0.82rem;
+  color: var(--sc-ink-3);
+  text-align: center;
+}
+
+/* ==========================================================================
+   Demo 3 — Newborn Log  (nb-)
+   ========================================================================== */
+
+.nb-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+.nb-stat {
+  background: var(--sc-bg);
+  border: 1px solid var(--sc-border);
+  border-radius: 10px;
+  padding: 0.6rem 0.7rem;
+  text-align: center;
+}
+.nb-stat-num { font-size: 1.05rem; font-weight: 700; display: block; }
+.nb-stat-label { font-size: 0.7rem; color: var(--sc-ink-3); }
+
+.nb-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1rem; }
+.nb-btn {
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.7rem 0.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--sc-ink);
+  background: var(--sc-invert-bg);
+  color: var(--sc-invert-ink);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.nb-btn i { margin-right: 0.4rem; }
+.nb-btn:hover { background: var(--sc-bg); color: var(--sc-ink); }
+.nb-btn.nb-sleeping {
+  background: var(--sc-bg);
+  color: var(--sc-ink);
+  border-style: dashed;
+}
+
+.nb-strip-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--sc-ink-3);
+  margin-bottom: 0.25rem;
+}
+.nb-strip {
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+  gap: 2px;
+  margin-bottom: 1rem;
+}
+.nb-cell { height: 14px; border-radius: 3px; background: var(--sc-surface-2); }
+.nb-cell.feed  { background: var(--sc-ink-3); }
+.nb-cell.sleep { background: var(--sc-ink); }
+.nb-legend { display: flex; gap: 1rem; font-size: 0.7rem; color: var(--sc-ink-3); margin: -0.6rem 0 1rem; }
+.nb-legend span::before {
+  content: "";
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 3px;
+  margin-right: 0.3rem;
+  vertical-align: -1px;
+  background: var(--sc-surface-2);
+}
+.nb-legend .lg-feed::before  { background: var(--sc-ink-3); }
+.nb-legend .lg-sleep::before { background: var(--sc-ink); }
+
+.nb-log { list-style: none; margin: 0; padding: 0; max-height: 220px; overflow-y: auto; }
+.nb-log li {
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+  font-size: 0.83rem;
+  padding: 0.4rem 0.2rem;
+  border-top: 1px dashed var(--sc-border);
+  color: var(--sc-ink-2);
+}
+.nb-log li:first-child { border-top: none; }
+.nb-log li.nb-new { animation: sc-fade 0.3s ease; }
+.nb-log-time { flex: 0 0 4.6rem; font-weight: 600; color: var(--sc-ink); font-variant-numeric: tabular-nums; }
+.nb-log-type i { width: 1.1rem; text-align: center; margin-right: 0.2rem; color: var(--sc-ink-3); }
+
+/* ==========================================================================
+   Demo 4 — Family Domain  (dm-)
+   ========================================================================== */
+
+.dm-browser {
+  background: var(--sc-bg);
+  border: 1px solid var(--sc-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.dm-browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--sc-border);
+  background: var(--sc-surface);
+}
+.dm-dots { display: flex; gap: 4px; }
+.dm-dots span { width: 8px; height: 8px; border-radius: 50%; background: var(--sc-border-strong); }
+.dm-url {
+  flex: 1;
+  font-size: 0.8rem;
+  color: var(--sc-ink-2);
+  background: var(--sc-bg);
+  border: 1px solid var(--sc-border);
+  border-radius: 999px;
+  padding: 0.2rem 0.8rem;
+  text-align: center;
+}
+.dm-url i { margin-right: 0.35rem; color: var(--sc-ink-3); font-size: 0.7rem; }
+
+.dm-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+@media (max-width: 640px) { .dm-body { grid-template-columns: 1fr; } }
+
+.dm-list { display: flex; flex-direction: column; gap: 0.4rem; }
+.dm-addr {
+  font: inherit;
+  font-size: 0.85rem;
+  text-align: left;
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid var(--sc-border);
+  background: var(--sc-bg);
+  color: var(--sc-ink);
+  cursor: pointer;
+  font-family: 'Inter', monospace;
+  transition: border-color 0.15s ease;
+}
+.dm-addr:hover { border-color: var(--sc-border-strong); }
+.dm-addr.active { border-color: var(--sc-ink); box-shadow: 0 0 0 1px var(--sc-ink); }
+.dm-addr .dm-addr-kind { float: right; font-size: 0.68rem; color: var(--sc-ink-3); text-transform: uppercase; letter-spacing: 0.05em; }
+
+.dm-right { display: flex; flex-direction: column; gap: 0.75rem; }
+.dm-family { display: flex; gap: 0.9rem; justify-content: center; padding: 0.6rem 0; }
+.dm-member { text-align: center; }
+.dm-avatar {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid var(--sc-border-strong);
+  background: var(--sc-surface);
+  color: var(--sc-ink-2);
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 0.3rem;
+  transition: all 0.2s ease;
+  opacity: 0.45;
+}
+.dm-member.lit .dm-avatar {
+  opacity: 1;
+  background: var(--sc-invert-bg);
+  color: var(--sc-invert-ink);
+  border-color: var(--sc-invert-bg);
+}
+.dm-member-name { font-size: 0.72rem; color: var(--sc-ink-3); }
+
+.dm-desc {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--sc-ink-2);
+  background: var(--sc-surface);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  min-height: 3.4rem;
+}
+.dm-points { margin: 0.9rem 0 0; padding: 0; list-style: none; font-size: 0.83rem; color: var(--sc-ink-2); }
+.dm-points li { padding: 0.3rem 0 0.3rem 1.2rem; position: relative; }
+.dm-points li::before { content: "—"; position: absolute; left: 0; color: var(--sc-ink-3); }

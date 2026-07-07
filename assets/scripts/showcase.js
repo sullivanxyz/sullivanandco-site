@@ -8,25 +8,69 @@
   "use strict";
 
   /* ------------------------------------------------------------------------
-     Tabs
+     Analytics — every event funnels through main.js's scTrack helper.
+     Event names: showcase_demo_engaged {project, source}
+                  showcase_demo_interacted {project, action}
      ------------------------------------------------------------------------ */
+  const PROJECT = { rx: "rolodex", bg: "budget", nb: "newborn_log", dm: "family_domain" };
+  function track(name, params) {
+    if (typeof window.scTrack === "function") window.scTrack(name, params);
+  }
+
+  /* ------------------------------------------------------------------------
+     Collapsible stage + tabs
+     ------------------------------------------------------------------------ */
+  const stage = document.getElementById("showcase");
+  const toggleBar = document.getElementById("showcaseToggle");
   const tabs = document.querySelectorAll(".showcase-tab");
   const panels = document.querySelectorAll(".showcase-panel");
-  function activatePanel(key) {
+
+  function currentProject() {
+    const active = document.querySelector(".showcase-tab.active");
+    return active ? PROJECT[active.dataset.panel] : "rolodex";
+  }
+  function setCollapsed(collapsed) {
+    if (!stage) return;
+    stage.classList.toggle("collapsed", collapsed);
+    if (toggleBar) toggleBar.setAttribute("aria-expanded", String(!collapsed));
+  }
+  function activatePanel(key, source) {
     tabs.forEach(function (t) { t.classList.toggle("active", t.dataset.panel === key); });
     panels.forEach(function (p) { p.classList.toggle("active", p.id === "sc-" + key); });
+    setCollapsed(false);
+    track("showcase_demo_engaged", { project: PROJECT[key], source: source || "unknown" });
   }
+
+  if (toggleBar) {
+    toggleBar.addEventListener("click", function () {
+      const opening = stage.classList.contains("collapsed");
+      setCollapsed(!opening);
+      if (opening) {
+        track("showcase_demo_engaged", { project: currentProject(), source: "bar" });
+      }
+    });
+  }
+
   tabs.forEach(function (tab) {
-    tab.addEventListener("click", function () { activatePanel(tab.dataset.panel); });
+    tab.addEventListener("click", function () { activatePanel(tab.dataset.panel, "tab"); });
   });
 
-  /* Deep links: elements elsewhere on the page (e.g. the offer cards) can
-     jump straight to a specific demo via data-showcase="rx|bg|nb|dm". */
+  /* Deep links: the offer cards jump straight to their demo via
+     data-showcase="rx|bg|nb|dm", expanding the stage if collapsed. */
   document.querySelectorAll("[data-showcase]").forEach(function (link) {
     link.addEventListener("click", function () {
-      activatePanel(link.dataset.showcase);
-      var section = document.getElementById("showcase");
-      if (section) section.scrollIntoView({ behavior: "smooth" });
+      activatePanel(link.dataset.showcase, "offer_card");
+      if (stage) stage.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  /* Nav "Showcase" link: expand the stage so it doesn't land on a closed bar. */
+  document.querySelectorAll('a[href="#showcase"]').forEach(function (a) {
+    a.addEventListener("click", function () {
+      if (stage && stage.classList.contains("collapsed")) {
+        setCollapsed(false);
+        track("showcase_demo_engaged", { project: currentProject(), source: "nav" });
+      }
     });
   });
 
@@ -129,7 +173,10 @@
           '<div class="rx-tags">' + t.tags.map(function (g) { return '<span class="rx-tag">' + g + "</span>"; }).join("") + "</div>" +
           '<div class="rx-seatbar"><div class="rx-seatbar-track"><div class="rx-seatbar-fill" style="width:' + pct + '%"></div></div>' +
           '<span class="rx-seatbar-count">' + t.guests.length + " of " + t.seats + "</span></div>";
-        btn.addEventListener("click", function () { selectTable(t.id); });
+        btn.addEventListener("click", function () {
+          selectTable(t.id);
+          track("showcase_demo_interacted", { project: "rolodex", action: "select_table" });
+        });
         listWrap.appendChild(btn);
       });
     }
@@ -178,7 +225,10 @@
             class: "rx-node" + (name === activeGuest ? " selected" : ""),
             cx: gx, cy: gy, r: 24
           });
-          node.addEventListener("click", function () { selectGuest(name, t); });
+          node.addEventListener("click", function () {
+            selectGuest(name, t);
+            track("showcase_demo_interacted", { project: "rolodex", action: "select_guest" });
+          });
           svg.appendChild(node);
           const label = svgEl("text", { class: "rx-node-label", x: gx, y: gy + 3.5 });
           label.textContent = name;
@@ -195,7 +245,10 @@
       others.forEach(function (o, i) {
         const s = miniSlots[i % miniSlots.length];
         const mini = svgEl("circle", { class: "rx-mini", cx: s.x, cy: s.y, r: 17 });
-        mini.addEventListener("click", function () { selectTable(o.id); });
+        mini.addEventListener("click", function () {
+          selectTable(o.id);
+          track("showcase_demo_interacted", { project: "rolodex", action: "select_table" });
+        });
         svg.appendChild(mini);
         const num = svgEl("text", { class: "rx-mini-label", x: s.x, y: s.y + 3.5 });
         num.textContent = o.id;
@@ -313,8 +366,14 @@
       next.disabled = monthIdx === MONTHS.length - 1;
       prev.setAttribute("aria-label", "Previous month");
       next.setAttribute("aria-label", "Next month");
-      prev.addEventListener("click", function () { monthIdx--; render(); });
-      next.addEventListener("click", function () { monthIdx++; render(); });
+      prev.addEventListener("click", function () {
+        monthIdx--; render();
+        track("showcase_demo_interacted", { project: "budget", action: "change_month" });
+      });
+      next.addEventListener("click", function () {
+        monthIdx++; render();
+        track("showcase_demo_interacted", { project: "budget", action: "change_month" });
+      });
       nav.appendChild(prev);
       nav.appendChild(el("span", "bg-month-label", m.label));
       nav.appendChild(next);
@@ -348,6 +407,7 @@
         headBtn.addEventListener("click", function () {
           openBuckets[b.name] = !openBuckets[b.name];
           bucket.classList.toggle("open");
+          track("showcase_demo_interacted", { project: "budget", action: "toggle_bucket" });
         });
         bucket.appendChild(headBtn);
 
@@ -445,9 +505,16 @@
         sleepStart
           ? '<i class="fas fa-sun"></i>Wake (' + fmtDur(Date.now() - sleepStart) + ")"
           : '<i class="fas ' + ICONS.sleep + '"></i>Sleep');
-      feedBtn.addEventListener("click", function () { log("feed", "Bottle, 4 oz"); });
-      diapBtn.addEventListener("click", function () { log("diaper", "Wet"); });
+      feedBtn.addEventListener("click", function () {
+        log("feed", "Bottle, 4 oz");
+        track("showcase_demo_interacted", { project: "newborn_log", action: "log_feed" });
+      });
+      diapBtn.addEventListener("click", function () {
+        log("diaper", "Wet");
+        track("showcase_demo_interacted", { project: "newborn_log", action: "log_diaper" });
+      });
       sleepBtn.addEventListener("click", function () {
+        track("showcase_demo_interacted", { project: "newborn_log", action: "sleep_toggle" });
         if (sleepStart) {
           entries.push({ type: "sleep", time: new Date(sleepStart), end: new Date(), note: "", isNew: true });
           sleepStart = null;
@@ -574,7 +641,10 @@
     ADDRESSES.forEach(function (a, i) {
       const btn = el("button", "dm-addr",
         a.addr + "thesullivans.family" + '<span class="dm-addr-kind">' + a.kind + "</span>");
-      btn.addEventListener("click", function () { select(i); });
+      btn.addEventListener("click", function () {
+        select(i);
+        track("showcase_demo_interacted", { project: "family_domain", action: "select_address" });
+      });
       addrBtns.push(btn);
       list.appendChild(btn);
     });

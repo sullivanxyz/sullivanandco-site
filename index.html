@@ -50,7 +50,7 @@
   <div class="hero">
     <h1>Make Life Work Better.</h1>
     <p class="subheadline">Upgrade your digital world and live lighter.</p>
-    <button class="cta-button" data-tally-open="mVa8N6" data-tally-auto-close="8000">Get Started Free</button>
+    <button class="cta-button" data-tally-open="mVa8N6" data-tally-auto-close="8000" data-cta="hero">Get Started Free</button>
     <p class="disclaimer">No commitment, no stress. Just clarity.</p>
   </div>
 
@@ -78,30 +78,20 @@
     <h2>What We Offer</h2>
     <p class="section-subtitle">Digital coaching and expert setup for busy professionals and families</p>
     <div class="grid-icons">
-      <button class="icon-box" data-showcase="dm"><i class="fas fa-folder-open"></i><div><strong>Hubs & Workspaces</strong><br>Branded email/websites and HQs that actually work <span class="icon-box-hint">See it in the showcase →</span></div></button>
-      <button class="icon-box" data-showcase="bg"><i class="fas fa-piggy-bank"></i><div><strong>Spending & Saving</strong><br>Cash flow tracking and finance automation, aligned to your goals<span class="icon-box-hint">See it in the showcase →</span></div></button>
-      <button class="icon-box" data-showcase="nb"><i class="fas fa-check-square"></i><div><strong>Routines & Templates</strong><br>Low-friction tools to own your day, week, and year <span class="icon-box-hint">See it in the showcase →</span></div></button>
-      <button class="icon-box" data-showcase="rx"><i class="fas fa-globe"></i><div><strong>Changes & Milestones</strong><br>Plan for life's big changes with systems that grow with you<span class="icon-box-hint">See it in the showcase →</span></div></button>
+      <button class="icon-box" data-showcase="dm"><i class="fas fa-folder-open"></i><div><strong>Hubs & Workspaces</strong><br>Branded email/websites and HQs that actually work <span class="icon-box-hint">— like a family domain with shared inboxes for the whole household →</span></div></button>
+      <button class="icon-box" data-showcase="bg"><i class="fas fa-piggy-bank"></i><div><strong>Spending & Saving</strong><br>Cash flow tracking and finance automation, aligned to your goals <span class="icon-box-hint">— like a three-bucket budget you can read in one glance →</span></div></button>
+      <button class="icon-box" data-showcase="nb"><i class="fas fa-check-square"></i><div><strong>Routines & Templates</strong><br>Low-friction tools to own your day, week, and year <span class="icon-box-hint">— like a newborn log built for one-handed 3am taps →</span></div></button>
+      <button class="icon-box" data-showcase="rx"><i class="fas fa-globe"></i><div><strong>Changes & Milestones</strong><br>Plan for life's big changes with systems that grow with you <span class="icon-box-hint">— like a wedding seating chart that feeds directly into a long-term family rolodex →</span></div></button>
     </div>
-  </div>
 
-  <div class="how-it-works">
-    <h3>How It Works</h3>
-      <div class="how-it-works-steps">
-        <p><span class="step-num">1</span> Book a free discovery call.</p>
-        <p><span class="step-num">2</span> Get a personalized setup plan.</p>
-        <p><span class="step-num">3</span> Choose one-time help or ongoing support.</p>
-	<p class="sample-cta">
-  	   <em>Curious what this actually looks like?</em>
-  	   <button class="sample-view-btn" onclick="document.getElementById('showcase').scrollIntoView({behavior:'smooth'})">See the showcase</button>
-	</p>
-      </div>
-  </div>
-
-  <!-- === Showcase: interactive demos === -->
-  <div id="showcase" class="showcase-section">
-    <h2>Built for Us First</h2>
-    <p class="section-subtitle">Every system below started as something I built for my own family. These aren't screenshots — they're working demos. Click around.</p>
+    <!-- === The Showcase: collapsible stage of working demos === -->
+    <div id="showcase" class="showcase-section collapsed">
+      <button class="showcase-bar" id="showcaseToggle" aria-expanded="false" aria-controls="showcaseBody">
+        <span class="showcase-bar-label">The Showcase</span>
+        <span class="showcase-bar-desc">Four working demos I built for my own family first — not screenshots. Click around.</span>
+        <span class="showcase-bar-chevron"><i class="fas fa-chevron-down"></i></span>
+      </button>
+      <div class="showcase-body" id="showcaseBody">
 
     <div class="showcase-tabs" role="tablist">
       <button class="showcase-tab active" data-panel="rx" role="tab">Wedding Rolodex</button>
@@ -118,7 +108,7 @@
       <div class="demo-frame">
         <div class="rx-app" id="rxApp"></div>
       </div>
-      <p class="panel-foot">The original ran a real wedding — six months of RSVPs, one source of truth. It still runs the holiday-card list today. <button class="panel-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000">Build one for yours →</button></p>
+      <p class="panel-foot">The original ran a real wedding — six months of RSVPs, one source of truth. It still runs the holiday-card list today. <button class="panel-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000" data-cta="panel_rolodex">Build one for yours →</button></p>
     </div>
 
     <!-- Demo 2: Family Budget -->
@@ -129,7 +119,7 @@
       <div class="demo-frame">
         <div id="bgApp"></div>
       </div>
-      <p class="panel-foot">Built on the tools you already have — no new app, no new logins, aligned to your goals. <button class="panel-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000">Set mine up →</button></p>
+      <p class="panel-foot">Built on the tools you already have — no new app, no new logins, aligned to your goals. <button class="panel-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000" data-cta="panel_budget">Set mine up →</button></p>
     </div>
 
     <!-- Demo 3: Newborn Log -->
@@ -140,7 +130,7 @@
       <div class="demo-frame">
         <div id="nbApp"></div>
       </div>
-      <p class="panel-foot">Designed for one-handed use in the dark, shared between both parents' phones. <button class="panel-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000">Expecting? Let's talk →</button></p>
+      <p class="panel-foot">Designed for one-handed use in the dark, shared between both parents' phones. <button class="panel-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000" data-cta="panel_newborn">Expecting? Let's talk →</button></p>
     </div>
 
     <!-- Demo 4: Family Domain -->
@@ -151,7 +141,18 @@
       <div class="demo-frame">
         <div id="dmApp"></div>
       </div>
-      <p class="panel-foot">This one's a teaser — every family's setup is different. <button class="panel-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000">Claim your name →</button></p>
+      <p class="panel-foot">This one's a teaser — every family's setup is different. <button class="panel-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000" data-cta="panel_domain">Claim your name →</button></p>
+    </div>
+      </div><!-- /showcase-body -->
+    </div><!-- /showcase-section -->
+  </div><!-- /resources-section -->
+
+  <div class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="how-it-works-steps">
+      <p><span class="step-num">1</span> Book a free discovery call.</p>
+      <p><span class="step-num">2</span> Get a personalized setup plan.</p>
+      <p><span class="step-num">3</span> Choose one-time help or ongoing support.</p>
     </div>
   </div>
 
@@ -177,7 +178,7 @@
   <div class="sample-work">
     <h2>Ready to Take the First Step?</h2>
     <p>Whether you're just starting or refining what already exists, let’s build something better together.</p>
-    <button class="sample-btn" data-tally-open="mVa8N6" data-tally-auto-close="8000">Start with a Free Discovery Call</button>
+    <button class="sample-btn" data-tally-open="mVa8N6" data-tally-auto-close="8000" data-cta="final">Start with a Free Discovery Call</button>
   </div>
 
 
@@ -189,7 +190,7 @@
 </div>
 
 <!-- Floating CTA -->
-<button id="floatingCTA" class="floating-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000" aria-label="Book a free discovery call">
+<button id="floatingCTA" class="floating-cta" data-tally-open="mVa8N6" data-tally-auto-close="8000" data-cta="floating" aria-label="Book a free discovery call">
   <i class="fa-solid fa-paper-plane"></i>
 </button>
 

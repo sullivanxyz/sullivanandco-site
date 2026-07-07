@@ -16,8 +16,64 @@
   --sc-invert-bg: #111111;
   --sc-invert-ink: #ffffff;
 
-  margin-top: 3rem;
+  margin-top: 1.25rem;
   scroll-margin-top: 80px;
+  border: 1px solid var(--sc-border);
+  border-radius: 12px;
+  background: var(--sc-bg);
+  overflow: hidden;
+}
+
+/* --- Collapsible stage bar ------------------------------------------------ */
+
+.showcase-bar {
+  font: inherit;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  background: var(--sc-surface);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--sc-ink);
+  transition: background 0.15s ease;
+}
+.showcase-bar:hover { background: var(--sc-surface-2); }
+.showcase-bar-label {
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.showcase-bar-desc {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--sc-ink-2);
+  line-height: 1.4;
+}
+.showcase-bar-chevron {
+  color: var(--sc-ink-3);
+  transition: transform 0.2s ease;
+}
+.showcase-section:not(.collapsed) .showcase-bar-chevron { transform: rotate(180deg); }
+
+.showcase-body {
+  padding: 1.1rem;
+  border-top: 1px solid var(--sc-border);
+}
+.showcase-section.collapsed .showcase-body { display: none; }
+
+@media (max-width: 520px) {
+  .showcase-bar-desc { display: none; }
+  .showcase-bar::after {
+    content: "4 working demos";
+    flex: 1;
+    font-size: 0.82rem;
+    color: var(--sc-ink-2);
+  }
 }
 
 @media (prefers-color-scheme: dark) {

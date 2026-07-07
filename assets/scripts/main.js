@@ -20,6 +20,23 @@ document.addEventListener("click", function(event) {
 /* Carousel code removed — replaced by the interactive showcase
    (assets/scripts/showcase.js). */
 
+/* === Google Analytics: Custom Event Helper === */
+/* Single funnel for all custom events. Safe if gtag is blocked or absent. */
+window.scTrack = function (name, params) {
+    if (typeof gtag === "function") gtag("event", name, params || {});
+};
+
+/* Track every discovery-call CTA (hero, floating, final, in-demo panels).
+   Delegated so it covers current and future Tally buttons. */
+document.addEventListener("click", function (event) {
+    var cta = event.target.closest("[data-tally-open]");
+    if (cta) {
+        window.scTrack("cta_discovery_click", {
+            placement: cta.dataset.cta || "unlabeled"
+        });
+    }
+});
+
 /* === Google Analytics: Debug & Scroll Tracking === */
 if (window.location.search.includes('debug=drew')) {
   gtag('set', 'user_properties', { user_type: 'drew_test' });

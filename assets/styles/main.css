@@ -127,20 +127,6 @@ header {
   color: #000;
 }
 
-.sample-view-btn {
-  font-size: 0.9rem;
-  padding: 0.3rem 0.75rem;
-  background-color: #f5f5f5;
-  color: #111;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.sample-view-btn:hover {
-  background-color: #f0f0f0;
-  color: #111;
-}
 .disclaimer {
   font-size: 0.9rem;
   color: #666;
@@ -208,7 +194,10 @@ header {
   margin-top: 0.45rem;
   font-size: 0.78rem;
   font-weight: 600;
-  color: #888;
+  color: #666;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: #bbb;
 }
 .icon-box:hover .icon-box-hint {
   color: #111;
@@ -381,17 +370,6 @@ body {
     color: #fff;
   }
 
-  .sample-view-btn {
-    background-color: #222;
-    color: #eee;
-    border-color: #444;
-  }
-
-  .sample-view-btn:hover {
-    background-color: #333;
-    color: #fff;
-  }
-
   .clean-section {
     background: #1e1e1e;
   }
@@ -515,10 +493,17 @@ body {
   margin-right: 0.4rem;
   color: #555;
 }
+.how-it-works {
+  margin-top: 3rem;
+}
 .how-it-works-steps {
   margin-left: 1rem;
   padding-left: 1rem;
   border-left: 2px solid #ddd;
+}
+.how-it-works-steps p {
+  font-size: 1.05rem;
+  margin: 0.9rem 0;
 }
 .step-num {
   display: inline-flex;
@@ -534,10 +519,3 @@ body {
   margin-right: 0.5rem;
 }
 
-.sample-cta {
-  margin-top: 1rem;
-  font-size: 0.95rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}

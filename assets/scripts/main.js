@@ -40,6 +40,8 @@ document.addEventListener("click", function (event) {
 /* === Google Analytics: Debug & Scroll Tracking === */
 if (window.location.search.includes('debug=drew')) {
   gtag('set', 'user_properties', { user_type: 'drew_test' });
+  /* Surface this session in GA4 Admin -> DebugView, event by event */
+  gtag('config', 'G-JBH4Q6L0QV', { debug_mode: true });
 }
 
 /* Fire the 50% scroll-depth event once, when the reader actually gets there
